@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Indexing, Slicing and Subsetting &#8212; Monash Data Fluency Introduction to Python</title>
+    <title>Indexing and Slicing &#8212; Monash Data Fluency Introduction to Python</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,6 +54,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Handling Missing data" href="missing_values.html" />
+    <link rel="prev" title="Data analysis in Python with Pandas" href="working_with_data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,6 +99,54 @@
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Standard workshop
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction - The Basics of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working_with_data.html">
+   Data analysis in Python with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Indexing and Slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="missing_values.html">
+   Handling Missing data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="loops.html">
+   Automation with Loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plotting_with_plotnine.html">
+   Making Plots With plotnine (aka ggplot)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   Reusable and modular code with functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="defensive_programming.html">
+   Defensive Programming
+  </a>
+ </li>
+</ul>
+
     </div>
 </nav> <!-- To handle the deprecated key -->
 
@@ -134,11 +184,14 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/indexing.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+        <a class="dropdown-buttons"
+            href="../_sources/notebooks/indexing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/indexing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -177,18 +230,13 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/indexing.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/jupyterbook?urlpath=lab/tree/workshop/notebooks/indexing.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
         
         
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/indexing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
         
         
     </div>
@@ -206,11 +254,11 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Indexing, Slicing and Subsetting
+   Indexing and Slicing
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#indexing-slicing-and-subsetting">
    Indexing, Slicing and Subsetting
   </a>
   <ul class="visible nav section-nav flex-column">
@@ -342,7 +390,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Indexing, Slicing and Subsetting</h1>
+                <h1>Indexing and Slicing</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -354,11 +402,11 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Indexing, Slicing and Subsetting
+   Indexing and Slicing
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
+  <a class="reference internal nav-link" href="#indexing-slicing-and-subsetting">
    Indexing, Slicing and Subsetting
   </a>
   <ul class="visible nav section-nav flex-column">
@@ -489,8 +537,8 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="indexing-slicing-and-subsetting">
-<h1>Indexing, Slicing and Subsetting<a class="headerlink" href="#indexing-slicing-and-subsetting" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="indexing-and-slicing">
+<h1>Indexing and Slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this headline">¶</a></h1>
 <p><em>Estimated teaching time:</em> 30 min</p>
 <p><em>Estimated challenge time:</em> 30 min</p>
 <p><em>Key questions:</em></p>
@@ -518,8 +566,8 @@
 <li><p>Subsetting</p></li>
 </ul>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>Indexing, Slicing and Subsetting<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="tex2jax_ignore mathjax_ignore section" id="indexing-slicing-and-subsetting">
+<h1>Indexing, Slicing and Subsetting<a class="headerlink" href="#indexing-slicing-and-subsetting" title="Permalink to this headline">¶</a></h1>
 <p>In this lesson, we will explore <strong>ways to access different parts of the data</strong> in a Pandas DataFrame using:</p>
 <ul class="simple">
 <li><p>Indexing,</p></li>
@@ -537,17 +585,17 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (1.4.0)
 Requirement already satisfied: matplotlib in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (3.5.1)
-Requirement already satisfied: pytz&gt;=2020.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2021.3)
-Requirement already satisfied: numpy&gt;=1.18.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (1.22.2)
 Requirement already satisfied: python-dateutil&gt;=2.8.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: numpy&gt;=1.18.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (1.22.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2021.3)
+Requirement already satisfied: cycler&gt;=0.10 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (9.0.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (1.3.2)
-Requirement already satisfied: cycler&gt;=0.10 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (4.29.1)
-Requirement already satisfied: pillow&gt;=6.2.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (9.0.1)
-Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (3.0.7)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fonttools&gt;=4.22.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (4.29.1)
 Requirement already satisfied: packaging&gt;=20.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (21.3)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (3.0.7)
 Requirement already satisfied: six&gt;=1.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas) (1.16.0)
 </pre></div>
 </div>
@@ -564,60 +612,6 @@ Requirement already satisfied: six&gt;=1.5 in /home/danph/Repos/win_ssd/myprojec
 
 <span class="c1"># Read in the survey CSV</span>
 <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_22092</span><span class="o">/</span><span class="mf">210192725.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Read in the survey CSV</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span> 
-<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">679</span> 
-<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">681</span> 
-<span class="g g-Whitespace">    </span><span class="mi">682</span> 
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">573</span> 
-<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">576</span> 
-<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span> 
-<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">934</span> 
-<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">789</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span>                 <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">791</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;surveys.csv&#39;
 </pre></div>
 </div>
 </div>
@@ -1383,6 +1377,11 @@ column location within the DataFrame and <code class="docutils literal notransla
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;F&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <p>Remember that Python indexing begins at 0. So, the index location [2, 6]
 selects the element that is 3 rows down and 7 columns over in the DataFrame.</p>
@@ -1413,6 +1412,52 @@ selects the element that is 3 rows down and 7 columns over in the DataFrame.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
@@ -1421,6 +1466,88 @@ selects the element that is 3 rows down and 7 columns over in the DataFrame.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
@@ -1429,6 +1556,173 @@ selects the element that is 3 rows down and 7 columns over in the DataFrame.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>35543</th>
+      <td>35544</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35544</th>
+      <td>35545</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35545</th>
+      <td>35546</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35546</th>
+      <td>35547</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>10</td>
+      <td>RM</td>
+      <td>F</td>
+      <td>15.0</td>
+      <td>14.0</td>
+    </tr>
+    <tr>
+      <th>35547</th>
+      <td>35548</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>7</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>51.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>35548 rows × 9 columns</p>
+</div></div></div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
@@ -1437,6 +1731,58 @@ selects the element that is 3 rows down and 7 columns over in the DataFrame.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </div>
 <div class="section" id="subsetting-data-using-criteria">
@@ -1449,6 +1795,100 @@ select all rows that <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>33320</th>
+      <td>33321</td>
+      <td>1</td>
+      <td>12</td>
+      <td>2002</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>38.0</td>
+      <td>44.0</td>
+    </tr>
+    <tr>
+      <th>33321</th>
+      <td>33322</td>
+      <td>1</td>
+      <td>12</td>
+      <td>2002</td>
+      <td>1</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>37.0</td>
+      <td>58.0</td>
+    </tr>
+    <tr>
+      <th>33322</th>
+      <td>33323</td>
+      <td>1</td>
+      <td>12</td>
+      <td>2002</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>M</td>
+      <td>28.0</td>
+      <td>45.0</td>
+    </tr>
+    <tr>
+      <th>33323</th>
+      <td>33324</td>
+      <td>1</td>
+      <td>12</td>
+      <td>2002</td>
+      <td>1</td>
+      <td>AB</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33324</th>
+      <td>33325</td>
+      <td>1</td>
+      <td>12</td>
+      <td>2002</td>
+      <td>1</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>29.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <p>Or we can select all rows that <code class="docutils literal notranslate"><span class="pre">do</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">the</span> <span class="pre">year</span> <span class="pre">2002</span></code>:</p>
 <div class="cell docutils container">
@@ -1457,6 +1897,173 @@ select all rows that <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>33315</th>
+      <td>33316</td>
+      <td>12</td>
+      <td>16</td>
+      <td>2001</td>
+      <td>11</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33316</th>
+      <td>33317</td>
+      <td>12</td>
+      <td>16</td>
+      <td>2001</td>
+      <td>13</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33317</th>
+      <td>33318</td>
+      <td>12</td>
+      <td>16</td>
+      <td>2001</td>
+      <td>14</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33318</th>
+      <td>33319</td>
+      <td>12</td>
+      <td>16</td>
+      <td>2001</td>
+      <td>15</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33319</th>
+      <td>33320</td>
+      <td>12</td>
+      <td>16</td>
+      <td>2001</td>
+      <td>16</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>33320 rows × 9 columns</p>
+</div></div></div>
 </div>
 <p>We can define sets of criteria too:</p>
 <div class="cell docutils container">
@@ -1465,6 +2072,173 @@ select all rows that <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2270</th>
+      <td>2271</td>
+      <td>1</td>
+      <td>15</td>
+      <td>1980</td>
+      <td>8</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>53.0</td>
+    </tr>
+    <tr>
+      <th>2271</th>
+      <td>2272</td>
+      <td>1</td>
+      <td>15</td>
+      <td>1980</td>
+      <td>11</td>
+      <td>PF</td>
+      <td>F</td>
+      <td>16.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>2272</th>
+      <td>2273</td>
+      <td>1</td>
+      <td>15</td>
+      <td>1980</td>
+      <td>18</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>34.0</td>
+      <td>33.0</td>
+    </tr>
+    <tr>
+      <th>2273</th>
+      <td>2274</td>
+      <td>1</td>
+      <td>15</td>
+      <td>1980</td>
+      <td>11</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>38.0</td>
+      <td>37.0</td>
+    </tr>
+    <tr>
+      <th>2274</th>
+      <td>2275</td>
+      <td>1</td>
+      <td>15</td>
+      <td>1980</td>
+      <td>8</td>
+      <td>DO</td>
+      <td>F</td>
+      <td>33.0</td>
+      <td>29.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>11222</th>
+      <td>11223</td>
+      <td>12</td>
+      <td>8</td>
+      <td>1985</td>
+      <td>4</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>40.0</td>
+    </tr>
+    <tr>
+      <th>11223</th>
+      <td>11224</td>
+      <td>12</td>
+      <td>8</td>
+      <td>1985</td>
+      <td>11</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>37.0</td>
+      <td>49.0</td>
+    </tr>
+    <tr>
+      <th>11224</th>
+      <td>11225</td>
+      <td>12</td>
+      <td>8</td>
+      <td>1985</td>
+      <td>7</td>
+      <td>PE</td>
+      <td>M</td>
+      <td>20.0</td>
+      <td>18.0</td>
+    </tr>
+    <tr>
+      <th>11225</th>
+      <td>11226</td>
+      <td>12</td>
+      <td>8</td>
+      <td>1985</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>38.0</td>
+      <td>47.0</td>
+    </tr>
+    <tr>
+      <th>11226</th>
+      <td>11227</td>
+      <td>12</td>
+      <td>8</td>
+      <td>1985</td>
+      <td>15</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>8957 rows × 9 columns</p>
+</div></div></div>
 </div>
 <div class="section" id="python-syntax-cheat-sheet">
 <h3>Python Syntax Cheat Sheet<a class="headerlink" href="#python-syntax-cheat-sheet" title="Permalink to this headline">¶</a></h3>
@@ -1503,11 +2277,110 @@ list of values as follows:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>29082</th>
+      <td>29083</td>
+      <td>1</td>
+      <td>16</td>
+      <td>1999</td>
+      <td>21</td>
+      <td>RM</td>
+      <td>M</td>
+      <td>16.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>29196</th>
+      <td>29197</td>
+      <td>2</td>
+      <td>20</td>
+      <td>1999</td>
+      <td>18</td>
+      <td>RM</td>
+      <td>M</td>
+      <td>18.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>29421</th>
+      <td>29422</td>
+      <td>3</td>
+      <td>15</td>
+      <td>1999</td>
+      <td>16</td>
+      <td>RM</td>
+      <td>M</td>
+      <td>15.0</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>29903</th>
+      <td>29904</td>
+      <td>10</td>
+      <td>10</td>
+      <td>1999</td>
+      <td>4</td>
+      <td>PP</td>
+      <td>M</td>
+      <td>20.0</td>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>29905</th>
+      <td>29906</td>
+      <td>10</td>
+      <td>10</td>
+      <td>1999</td>
+      <td>4</td>
+      <td>PP</td>
+      <td>M</td>
+      <td>21.0</td>
+      <td>4.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># when only interested in how many, the sum of True values could be used as well: </span>
 <span class="nb">sum</span><span class="p">((</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1999</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
 </div>
@@ -1519,11 +2392,22 @@ list of values as follows:</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 1, 10,  6, 24,  2, 23, 19, 12, 20, 22,  3,  9, 14, 13, 21,  7, 11,
+       15,  4, 16, 17,  8, 18,  5])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To get number of records</span>
 <span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;PB&#39;</span><span class="p">,</span> <span class="s1">&#39;PL&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2927, 9)
 </pre></div>
 </div>
 </div>
@@ -1545,6 +2429,11 @@ the “surveys” data.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32283
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
@@ -1552,6 +2441,173 @@ the “surveys” data.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>8</td>
+      <td>DM</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>4</td>
+      <td>PF</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>34</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>17</td>
+      <td>DM</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>57</td>
+      <td>7</td>
+      <td>18</td>
+      <td>1977</td>
+      <td>22</td>
+      <td>DM</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>77</td>
+      <td>8</td>
+      <td>19</td>
+      <td>1977</td>
+      <td>4</td>
+      <td>SS</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>35527</th>
+      <td>35528</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>13</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35543</th>
+      <td>35544</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35544</th>
+      <td>35545</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35545</th>
+      <td>35546</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35548</th>
+      <td>35549</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>2511 rows × 9 columns</p>
+</div></div></div>
 </div>
 </div>
 </div>
@@ -1576,11 +2632,21 @@ we also need to understand <code class="docutils literal notranslate"><span clas
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How about this?</span>
 <span class="n">x</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -1609,11 +2675,21 @@ plot.</p></li>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2511
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_solution docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can verify the number of NaN values with</span>
 <span class="nb">sum</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2511
 </pre></div>
 </div>
 </div>
@@ -1636,6 +2712,12 @@ plot.</p></li>
 <span class="n">stack_selection</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;site_id&#39;&gt;
+</pre></div>
+</div>
+<img alt="../_images/indexing_74_1.png" src="../_images/indexing_74_1.png" />
 </div>
 </div>
 </div>
@@ -1665,7 +2747,21 @@ plot.</p></li>
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="working_with_data.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Data analysis in Python with Pandas</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="missing_values.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Handling Missing data</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>

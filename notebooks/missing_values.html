@@ -54,6 +54,8 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Automation with Loops" href="loops.html" />
+    <link rel="prev" title="Indexing and Slicing" href="indexing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -97,6 +99,54 @@
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Standard workshop
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Introduction - The Basics of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="working_with_data.html">
+   Data analysis in Python with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="indexing.html">
+   Indexing and Slicing
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Handling Missing data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="loops.html">
+   Automation with Loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="plotting_with_plotnine.html">
+   Making Plots With plotnine (aka ggplot)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="functions.html">
+   Reusable and modular code with functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="defensive_programming.html">
+   Defensive Programming
+  </a>
+ </li>
+</ul>
+
     </div>
 </nav> <!-- To handle the deprecated key -->
 
@@ -134,11 +184,14 @@
 
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/missing_values.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+        <a class="dropdown-buttons"
+            href="../_sources/notebooks/missing_values.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/missing_values.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
                 onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -177,18 +230,13 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/missing_values.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/jupyterbook?urlpath=lab/tree/workshop/notebooks/missing_values.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
         
         
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/missing_values.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
         
         
     </div>
@@ -415,18 +463,18 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (1.4.0)
 Requirement already satisfied: matplotlib in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (3.5.1)
+Requirement already satisfied: numpy&gt;=1.18.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (1.22.2)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2021.3)
 Requirement already satisfied: python-dateutil&gt;=2.8.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2.8.2)
-Requirement already satisfied: numpy&gt;=1.18.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (1.22.2)
-Requirement already satisfied: pillow&gt;=6.2.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (9.0.1)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (1.3.2)
-Requirement already satisfied: packaging&gt;=20.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (21.3)
-Requirement already satisfied: cycler&gt;=0.10 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (4.29.1)
-Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (3.0.7)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas) (1.16.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fonttools&gt;=4.22.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (4.29.1)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (3.0.7)
+Requirement already satisfied: cycler&gt;=0.10 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: packaging&gt;=20.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (21.3)
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (9.0.1)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: six&gt;=1.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas) (1.16.0)
 </pre></div>
 </div>
 </div>
@@ -443,58 +491,6 @@ Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_22225</span><span class="o">/</span><span class="mf">2629989702.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span> 
-<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">679</span> 
-<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">681</span> 
-<span class="g g-Whitespace">    </span><span class="mi">682</span> 
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">573</span> 
-<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
-<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">576</span> 
-<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span> 
-<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">934</span> 
-<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
-
-<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
-<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="c1"># Encoding</span>
-<span class="ne">--&gt; </span><span class="mi">789</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">790</span>                 <span class="n">handle</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">791</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;surveys.csv&#39;
 </pre></div>
 </div>
 </div>
@@ -552,17 +548,17 @@ has a null value, it will be assigned a value of  <code class="docutils literal 
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -659,17 +655,17 @@ the mask as an index to subset our data as follows:</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
     }
 
     .dataframe tbody tr th {
         vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
     }
 </style>
 <table border="1" class="dataframe">
@@ -749,306 +745,6 @@ the mask as an index to subset our data as follows:</p>
       <td>NaN</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>6</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>1</td>
-      <td>PF</td>
-      <td>M</td>
-      <td>14.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>7</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>2</td>
-      <td>PE</td>
-      <td>F</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>8</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>1</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>37.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>9</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>1</td>
-      <td>DM</td>
-      <td>F</td>
-      <td>34.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>10</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>6</td>
-      <td>PF</td>
-      <td>F</td>
-      <td>20.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>11</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>5</td>
-      <td>DS</td>
-      <td>F</td>
-      <td>53.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>12</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>7</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>38.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>13</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>3</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>35.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>14</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>8</td>
-      <td>DM</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>15</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>6</td>
-      <td>DM</td>
-      <td>F</td>
-      <td>36.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>16</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>4</td>
-      <td>DM</td>
-      <td>F</td>
-      <td>36.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>17</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>3</td>
-      <td>DS</td>
-      <td>F</td>
-      <td>48.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>18</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>2</td>
-      <td>PP</td>
-      <td>M</td>
-      <td>22.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>19</td>
-      <td>7</td>
-      <td>16</td>
-      <td>1977</td>
-      <td>4</td>
-      <td>PF</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>20</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>11</td>
-      <td>DS</td>
-      <td>F</td>
-      <td>48.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>21</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>14</td>
-      <td>DM</td>
-      <td>F</td>
-      <td>34.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>22</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>15</td>
-      <td>NL</td>
-      <td>F</td>
-      <td>31.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>23</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>13</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>36.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>24</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>13</td>
-      <td>SH</td>
-      <td>M</td>
-      <td>21.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>25</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>9</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>35.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>26</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>15</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>31.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>27</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>15</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>36.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>28</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>11</td>
-      <td>DM</td>
-      <td>M</td>
-      <td>38.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>29</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>11</td>
-      <td>PP</td>
-      <td>M</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>30</td>
-      <td>7</td>
-      <td>17</td>
-      <td>1977</td>
-      <td>10</td>
-      <td>DS</td>
-      <td>F</td>
-      <td>52.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
       <th>...</th>
       <td>...</td>
       <td>...</td>
@@ -1059,306 +755,6 @@ the mask as an index to subset our data as follows:</p>
       <td>...</td>
       <td>...</td>
       <td>...</td>
-    </tr>
-    <tr>
-      <th>35187</th>
-      <td>35188</td>
-      <td>11</td>
-      <td>10</td>
-      <td>2002</td>
-      <td>10</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35256</th>
-      <td>35257</td>
-      <td>12</td>
-      <td>7</td>
-      <td>2002</td>
-      <td>22</td>
-      <td>PB</td>
-      <td>M</td>
-      <td>26.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35259</th>
-      <td>35260</td>
-      <td>12</td>
-      <td>7</td>
-      <td>2002</td>
-      <td>21</td>
-      <td>PB</td>
-      <td>F</td>
-      <td>24.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35277</th>
-      <td>35278</td>
-      <td>12</td>
-      <td>7</td>
-      <td>2002</td>
-      <td>20</td>
-      <td>AH</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35279</th>
-      <td>35280</td>
-      <td>12</td>
-      <td>7</td>
-      <td>2002</td>
-      <td>16</td>
-      <td>PB</td>
-      <td>M</td>
-      <td>28.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35322</th>
-      <td>35323</td>
-      <td>12</td>
-      <td>8</td>
-      <td>2002</td>
-      <td>11</td>
-      <td>AH</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35328</th>
-      <td>35329</td>
-      <td>12</td>
-      <td>8</td>
-      <td>2002</td>
-      <td>11</td>
-      <td>PP</td>
-      <td>M</td>
-      <td>NaN</td>
-      <td>16.0</td>
-    </tr>
-    <tr>
-      <th>35370</th>
-      <td>35371</td>
-      <td>12</td>
-      <td>8</td>
-      <td>2002</td>
-      <td>14</td>
-      <td>AH</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35378</th>
-      <td>35379</td>
-      <td>12</td>
-      <td>8</td>
-      <td>2002</td>
-      <td>15</td>
-      <td>PB</td>
-      <td>F</td>
-      <td>26.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35384</th>
-      <td>35385</td>
-      <td>12</td>
-      <td>8</td>
-      <td>2002</td>
-      <td>10</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35387</th>
-      <td>35388</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>1</td>
-      <td>DO</td>
-      <td>M</td>
-      <td>35.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35403</th>
-      <td>35404</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>2</td>
-      <td>NL</td>
-      <td>F</td>
-      <td>30.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35448</th>
-      <td>35449</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>20</td>
-      <td>OT</td>
-      <td>F</td>
-      <td>20.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35452</th>
-      <td>35453</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>20</td>
-      <td>PB</td>
-      <td>M</td>
-      <td>28.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35457</th>
-      <td>35458</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>20</td>
-      <td>AH</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35477</th>
-      <td>35478</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>24</td>
-      <td>AH</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35485</th>
-      <td>35486</td>
-      <td>12</td>
-      <td>29</td>
-      <td>2002</td>
-      <td>16</td>
-      <td>DO</td>
-      <td>M</td>
-      <td>37.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35495</th>
-      <td>35496</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>4</td>
-      <td>PB</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35510</th>
-      <td>35511</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>11</td>
-      <td>DX</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35511</th>
-      <td>35512</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>11</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35512</th>
-      <td>35513</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>11</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35514</th>
-      <td>35515</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>11</td>
-      <td>SF</td>
-      <td>F</td>
-      <td>27.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35519</th>
-      <td>35520</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>9</td>
-      <td>SF</td>
-      <td>NaN</td>
-      <td>24.0</td>
-      <td>36.0</td>
-    </tr>
-    <tr>
-      <th>35527</th>
-      <td>35528</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>13</td>
-      <td>US</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>35529</th>
-      <td>35530</td>
-      <td>12</td>
-      <td>31</td>
-      <td>2002</td>
-      <td>13</td>
-      <td>OT</td>
-      <td>F</td>
-      <td>20.0</td>
-      <td>NaN</td>
     </tr>
     <tr>
       <th>35530</th>
@@ -1549,7 +945,7 @@ NaN values with a mean for all weight values.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.67242821299182
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.672428212991356
 </pre></div>
 </div>
 </div>
@@ -1611,57 +1007,7 @@ pandas doesn’t include the index number for each line.</p>
 2       NaN
 3       NaN
 4       NaN
-5       NaN
-6       NaN
-7       NaN
-8       NaN
-9       NaN
-10      NaN
-11      NaN
-12      NaN
-13      NaN
-14      NaN
-15      NaN
-16      NaN
-17      NaN
-18      NaN
-19      NaN
-20      NaN
-21      NaN
-22      NaN
-23      NaN
-24      NaN
-25      NaN
-26      NaN
-27      NaN
-28      NaN
-29      NaN
          ..
-35138   NaN
-35168   NaN
-35187   NaN
-35256   NaN
-35259   NaN
-35277   NaN
-35279   NaN
-35322   NaN
-35370   NaN
-35378   NaN
-35384   NaN
-35387   NaN
-35403   NaN
-35448   NaN
-35452   NaN
-35457   NaN
-35477   NaN
-35485   NaN
-35495   NaN
-35510   NaN
-35511   NaN
-35512   NaN
-35514   NaN
-35527   NaN
-35529   NaN
 35530   NaN
 35543   NaN
 35544   NaN
@@ -1702,7 +1048,21 @@ asking Python to select rows that have a <code class="docutils literal notransla
               
             
                 <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="indexing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Indexing and Slicing</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="loops.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Automation with Loops</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             
         </div>
