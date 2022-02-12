@@ -1,0 +1,1088 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Combining DataFrames with Pandas &#8212; Monash Data Fluency Introduction to Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Monash Data Fluency Introduction to Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Introduction to Python Workshop
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/merging_data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base/issues/new?title=Issue%20on%20page%20%2Fnotebooks/merging_data.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/merging_data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/merging_data.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Combining DataFrames with Pandas
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concatenating-dataframes">
+   Concatenating DataFrames
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#row-index-values-and-concat">
+     Row Index Values and Concat
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-out-data-to-csv">
+   Writing Out Data to CSV
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-combine-data">
+   Challenge - Combine Data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#joining-dataframes">
+   Joining DataFrames
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joining-two-dataframes">
+     Joining Two DataFrames
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inner-joins">
+     Inner Joins
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#left-joins">
+     Left Joins
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-join-types">
+     Other join types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extra-challenge-1">
+   Extra Challenge 1
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Combining DataFrames with Pandas</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Combining DataFrames with Pandas
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#concatenating-dataframes">
+   Concatenating DataFrames
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#row-index-values-and-concat">
+     Row Index Values and Concat
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-out-data-to-csv">
+   Writing Out Data to CSV
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-combine-data">
+   Challenge - Combine Data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#joining-dataframes">
+   Joining DataFrames
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#joining-two-dataframes">
+     Joining Two DataFrames
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inner-joins">
+     Inner Joins
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#left-joins">
+     Left Joins
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-join-types">
+     Other join types
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extra-challenge-1">
+   Extra Challenge 1
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="combining-dataframes-with-pandas">
+<h1>Combining DataFrames with Pandas<a class="headerlink" href="#combining-dataframes-with-pandas" title="Permalink to this headline">¶</a></h1>
+<p>In many “real world” situations, the data that we want to use come in multiple files. We often need to combine these files into a single DataFrame to analyze the data. The pandas package provides various methods for combining DataFrames including <code class="docutils literal notranslate"><span class="pre">merge</span></code> and <code class="docutils literal notranslate"><span class="pre">concat</span></code>.</p>
+<p>To work through the examples below, we first need to load the species and surveys files into pandas DataFrames. Before we start, we will make sure that libraries are currectly installed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install pandas matplotlib
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">pandas</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="mf">0.23.0</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">matplotlib</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="mf">2.2.2</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">python</span><span class="o">-</span><span class="n">dateutil</span><span class="o">&gt;=</span><span class="mf">2.5.0</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">pandas</span><span class="p">)</span> <span class="p">(</span><span class="mf">2.7.3</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">pytz</span><span class="o">&gt;=</span><span class="mi">2011</span><span class="n">k</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">pandas</span><span class="p">)</span> <span class="p">(</span><span class="mf">2018.4</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">numpy</span><span class="o">&gt;=</span><span class="mf">1.9.0</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">pandas</span><span class="p">)</span> <span class="p">(</span><span class="mf">1.14.3</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">cycler</span><span class="o">&gt;=</span><span class="mf">0.10</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">matplotlib</span><span class="p">)</span> <span class="p">(</span><span class="mf">0.10.0</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">six</span><span class="o">&gt;=</span><span class="mf">1.10</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">matplotlib</span><span class="p">)</span> <span class="p">(</span><span class="mf">1.11.0</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">pyparsing</span><span class="o">!=</span><span class="mf">2.0.4</span><span class="p">,</span><span class="o">!=</span><span class="mf">2.1.2</span><span class="p">,</span><span class="o">!=</span><span class="mf">2.1.6</span><span class="p">,</span><span class="o">&gt;=</span><span class="mf">2.0.1</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">matplotlib</span><span class="p">)</span> <span class="p">(</span><span class="mf">2.2.0</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">kiwisolver</span><span class="o">&gt;=</span><span class="mf">1.0.1</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">matplotlib</span><span class="p">)</span> <span class="p">(</span><span class="mf">1.0.1</span><span class="p">)</span>
+<span class="n">Requirement</span> <span class="n">already</span> <span class="n">satisfied</span><span class="p">:</span> <span class="n">setuptools</span> <span class="ow">in</span> <span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">asha0035</span><span class="o">/.</span><span class="n">local</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvs</span><span class="o">/</span><span class="n">python</span><span class="o">-</span><span class="n">workshop</span><span class="o">-</span><span class="n">base</span><span class="o">-</span><span class="n">LFzz33nP</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span> <span class="p">(</span><span class="kn">from</span> <span class="nn">kiwisolver</span><span class="o">&gt;=</span><span class="mf">1.0.1</span><span class="o">-&gt;</span><span class="n">matplotlib</span><span class="p">)</span> <span class="p">(</span><span class="mf">39.2.0</span><span class="p">)</span>
+<span class="n">You</span> <span class="n">are</span> <span class="n">using</span> <span class="n">pip</span> <span class="n">version</span> <span class="mf">10.0.1</span><span class="p">,</span> <span class="n">however</span> <span class="n">version</span> <span class="mf">18.1</span> <span class="ow">is</span> <span class="n">available</span><span class="o">.</span>
+<span class="n">You</span> <span class="n">should</span> <span class="n">consider</span> <span class="n">upgrading</span> <span class="n">via</span> <span class="n">the</span> <span class="s1">&#39;pip install --upgrade pip&#39;</span> <span class="n">command</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">,</span>
+                         <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<span class="n">surveys_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_22189</span><span class="o">/</span><span class="mf">3680260021.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>                          <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">surveys_df</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span> 
+<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span> 
+<span class="g g-Whitespace">    </span><span class="mi">682</span> 
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span> 
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> 
+<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span> 
+<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span> 
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">789</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>                 <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;surveys.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="concatenating-dataframes">
+<h1>Concatenating DataFrames<a class="headerlink" href="#concatenating-dataframes" title="Permalink to this headline">¶</a></h1>
+<p>We can use the concat function in pandas to append either columns or rows from one DataFrame to another. Let’s grab two subsets of our data to see how this works.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in first 10 lines of surveys table</span>
+<span class="n">survey_sub</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Grab the last 10 rows</span>
+<span class="n">survey_sub_last10</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Reset the index values to the second dataframe appends properly</span>
+<span class="n">survey_sub_last10</span><span class="o">=</span><span class="n">survey_sub_last10</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># drop=True option avoids adding new index column with old index values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we concatenate DataFrames, we need to specify the axis. axis=0 tells pandas to stack the second DataFrame under the first one. It will automatically detect whether the column names are the same and will stack accordingly. axis=1 will stack the columns in the second DataFrame to the RIGHT of the first DataFrame. To stack the data vertically, we need to make sure we have the same columns and associated column format in both datasets. When we stack horizonally, we want to make sure what we are doing makes sense (ie the data are related in some way).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Stack the DataFrames on top of each other</span>
+<span class="n">vertical_stack</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">survey_sub</span><span class="p">,</span> <span class="n">survey_sub_last10</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Place the DataFrames side by side</span>
+<span class="n">horizontal_stack</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">survey_sub</span><span class="p">,</span> <span class="n">survey_sub_last10</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="row-index-values-and-concat">
+<h2>Row Index Values and Concat<a class="headerlink" href="#row-index-values-and-concat" title="Permalink to this headline">¶</a></h2>
+<p>Have a look at the <code class="docutils literal notranslate"><span class="pre">vertical_stack</span></code> dataframe? Notice anything unusual? The row indexes for the two data frames <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> and <code class="docutils literal notranslate"><span class="pre">survey_sub_last10</span></code> have been repeated. We can reindex the new dataframe using the reset_index() method.</p>
+</div>
+</div>
+<div class="section" id="writing-out-data-to-csv">
+<h1>Writing Out Data to CSV<a class="headerlink" href="#writing-out-data-to-csv" title="Permalink to this headline">¶</a></h1>
+<p>We can use the to_csv command to do export a DataFrame in CSV format. Note that the code below will by default save the data into the current working directory. We can save it to a different folder by adding the foldername and a slash to the file <code class="docutils literal notranslate"><span class="pre">vertical_stack.to_csv('foldername/out.csv')</span></code>. We use the ‘index=False’ so that pandas doesn’t include the index number for each line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write DataFrame to CSV</span>
+<span class="n">vertical_stack</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;output/out.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check out your working directory to make sure the CSV wrote out properly, and that you can open it! If you want, try to bring it back into Python to make sure it imports properly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For kicks read our output back into Python and make sure all looks good</span>
+<span class="n">new_output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;output/out.csv&#39;</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="challenge-combine-data">
+<h1>Challenge - Combine Data<a class="headerlink" href="#challenge-combine-data" title="Permalink to this headline">¶</a></h1>
+<p>In the data folder, there are two survey data files: survey2001.csv and survey2002.csv. Read the data into Python and combine the files to make one new data frame. Create a plot of average plot weight by year grouped by sex. Export your results as a CSV and make sure it reads back into Python properly.</p>
+</div>
+<div class="section" id="joining-dataframes">
+<h1>Joining DataFrames<a class="headerlink" href="#joining-dataframes" title="Permalink to this headline">¶</a></h1>
+<p>When we concatenated our DataFrames we simply added them to each other - stacking them either vertically or side by side. Another way to combine DataFrames is to use columns in each dataset that contain common values (a common unique id). Combining DataFrames using a common field is called “joining”. The columns containing the common values are called “join key(s)”. Joining DataFrames in this way is often useful when one DataFrame is a “lookup table” containing additional data that we want to include in the other.</p>
+<p>NOTE: This process of joining tables is similar to what we do with tables in an SQL database.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">species.csv</span></code> file that we’ve been working with is a lookup table. This table contains the genus, species and taxa code for 55 species. The species code is unique for each line. These species are identified in our survey data as well using the unique species code. Rather than adding 3 more columns for the genus, species and taxa to each of the 35,549 line Survey data table, we can maintain the shorter table with the species information. When we want to access that information, we can create a query that joins the additional columns of information to the Survey data.</p>
+<p>Storing data in this way has many benefits including:</p>
+<ol class="simple">
+<li><p>It ensures consistency in the spelling of species attributes (genus, species and taxa) given each species is only entered once. Imagine the possibilities for spelling errors when entering the genus and species thousands of times!</p></li>
+<li><p>It also makes it easy for us to make changes to the species information once without having to find each instance of it in the larger survey data.</p></li>
+<li><p>It optimizes the size of our data.</p></li>
+</ol>
+<div class="section" id="joining-two-dataframes">
+<h2>Joining Two DataFrames<a class="headerlink" href="#joining-two-dataframes" title="Permalink to this headline">¶</a></h2>
+<p>To better understand joins, let’s grab the first 10 lines of our data as a subset to work with. We’ll use the <code class="docutils literal notranslate"><span class="pre">.head</span></code> method to do this. We’ll also read in a subset of the species table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read in first 10 lines of surveys table</span>
+<span class="n">survey_sub</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1">### Download speciesSubset.csv file from web</span>
+<span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://bit.ly/2DfqN6C&#39;</span>
+
+
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;speciesSubset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Import a small subset of the species data designed for this part of the lesson.</span>
+<span class="c1"># It is stored in the data folder.</span>
+<span class="n">species_sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;speciesSubset.csv&#39;</span><span class="p">,</span> <span class="n">keep_default_na</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">species_sub</span></code> is the lookup table containing genus, species, and taxa names that we want to join with the data in <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> to produce a new DataFrame that contains all of the columns from both <code class="docutils literal notranslate"><span class="pre">species_df</span></code> and <code class="docutils literal notranslate"><span class="pre">survey_df</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">species_sub</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;species_id&#39;, &#39;genus&#39;, &#39;species&#39;, &#39;taxa&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">survey_sub</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;record_id&#39;, &#39;month&#39;, &#39;day&#39;, &#39;year&#39;, &#39;site_id&#39;, &#39;species_id&#39;, &#39;sex&#39;,
+       &#39;hindfoot_length&#39;, &#39;weight&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In our example, the join key is the column containing the two-letter species identifier, which is called <code class="docutils literal notranslate"><span class="pre">species_id</span></code>.</p>
+<p>Now that we know the fields with the common species ID attributes in each DataFrame, we are almost ready to join our data. However, since there are <strong>different types of joins</strong>, we also need to decide which type of join makes sense for our analysis.</p>
+</div>
+<div class="section" id="inner-joins">
+<h2>Inner Joins<a class="headerlink" href="#inner-joins" title="Permalink to this headline">¶</a></h2>
+<p>The most common type of join is called an <em>inner join</em>. An inner join combines two DataFrames based on a join key and returns a new DataFrame that contains only those rows that have matching values in both of the original DataFrames.</p>
+<p>Inner joins yield a DataFrame that contains only rows where the value being joins exists in BOTH tables. An example of an inner join, adapted from <a class="reference external" href="https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/">this page</a> is below:</p>
+<p><img alt="inner join" src="../_images/inner-join.png" /></p>
+<p>The pandas function for performing joins is called <code class="docutils literal notranslate"><span class="pre">merge</span></code> and an Inner join is the default option:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_inner</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">survey_sub</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">species_sub</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;species_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;species_id&#39;</span><span class="p">)</span>
+<span class="c1"># In this case `species_id` is the only column name in  both dataframes, so if we skippd `left_on`</span>
+<span class="c1"># And `right_on` arguments we would still get the same result</span>
+
+<span class="c1"># What&#39;s the size of the output data?</span>
+<span class="n">merged_inner</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">merged_inner</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+      <th>genus</th>
+      <th>species</th>
+      <th>taxa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+      <td>Neotoma</td>
+      <td>albigula</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+      <td>Neotoma</td>
+      <td>albigula</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>8</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>37.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>34.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>PE</td>
+      <td>F</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Peromyscus</td>
+      <td>eremicus</td>
+      <td>Rodent</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The result of an inner join of <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> and <code class="docutils literal notranslate"><span class="pre">species_sub</span></code> is a new DataFrame that contains the combined set of columns from <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> and <code class="docutils literal notranslate"><span class="pre">species_sub</span></code>. It only contains rows that have two-letter species codes that are the same in both the <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> and <code class="docutils literal notranslate"><span class="pre">species_sub</span></code> DataFrames. In other words, if a row in <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> has a value of <code class="docutils literal notranslate"><span class="pre">species_id</span></code> that does not appear in the <code class="docutils literal notranslate"><span class="pre">species_id</span></code> column of <code class="docutils literal notranslate"><span class="pre">species</span></code>, it will not be included in the DataFrame returned by an inner join. Similarly, if a row in <code class="docutils literal notranslate"><span class="pre">species_sub</span></code> has a value of <code class="docutils literal notranslate"><span class="pre">species_id</span></code> that does not appear in the <code class="docutils literal notranslate"><span class="pre">species_id</span></code> column of <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code>, that row will not be included in the DataFrame returned by an <strong>inner join</strong>.</p>
+<p>The two DataFrames that we want to join are passed to the <code class="docutils literal notranslate"><span class="pre">merge</span></code> function using the left and right argument. The <code class="docutils literal notranslate"><span class="pre">left_on='species'</span></code> argument tells <code class="docutils literal notranslate"><span class="pre">merge</span></code> to use the <code class="docutils literal notranslate"><span class="pre">species_id</span></code> column as the join key from <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> (the left DataFrame). Similarly , the <code class="docutils literal notranslate"><span class="pre">right_on='species_id'</span></code> argument tells merge to use the <code class="docutils literal notranslate"><span class="pre">species_id</span></code> column as the join key from <code class="docutils literal notranslate"><span class="pre">species_sub</span></code> (the right DataFrame). For inner joins, the order of the left and right arguments does not matter.</p>
+<p>The result <code class="docutils literal notranslate"><span class="pre">merged_inner</span></code> DataFrame contains all of the columns from <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> (record id, month, day, etc.) as well as all the columns from species_sub (species_id, genus, species, and taxa).</p>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">merged_inner</span></code> has fewer rows than <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code>. This is an indication that there were rows in <code class="docutils literal notranslate"><span class="pre">surveys_df</span></code> with value(s) for species_id that do not exist as value(s) for <code class="docutils literal notranslate"><span class="pre">species_id</span></code> in <code class="docutils literal notranslate"><span class="pre">species_df</span></code>.</p>
+</div>
+<div class="section" id="left-joins">
+<h2>Left Joins<a class="headerlink" href="#left-joins" title="Permalink to this headline">¶</a></h2>
+<p>What if we want to add information from <code class="docutils literal notranslate"><span class="pre">species_sub</span></code> to <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> without losing any of the information from <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code>? In this case, we use a different type of join called a “left outer join”, or a “left join”.</p>
+<p>Like an inner join, a left join uses join keys to combine two DataFrames. Unlike an inner join, a left join will return <em>all</em> of the rows from the <code class="docutils literal notranslate"><span class="pre">left</span></code> DataFrame, even those rows whose join key(s) do not have values in the <code class="docutils literal notranslate"><span class="pre">right</span></code> DataFrame. Rows in the left DataFrame that are missing values for the join key(s) in the <code class="docutils literal notranslate"><span class="pre">right</span></code> DataFrame will simply have null (i.e., NaN or None) values for those columns in the resulting joined DataFrame.</p>
+<p>Note: a left join will still discard rows from the <code class="docutils literal notranslate"><span class="pre">right</span></code> DataFrame that do not have values for the join key(s) in the <code class="docutils literal notranslate"><span class="pre">left</span></code> DataFrame.</p>
+<p><img alt="left join" src="../_images/left_join.png" /></p>
+<p>A left join is performed in pandas by calling the same <code class="docutils literal notranslate"><span class="pre">merge</span></code> function used for inner join, but using the <code class="docutils literal notranslate"><span class="pre">how='left'</span></code> argument:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="n">survey_sub</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="n">species_sub</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">&#39;species_id&#39;</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">&#39;species_id&#39;</span><span class="p">)</span>
+
+<span class="n">merged_left</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+      <th>genus</th>
+      <th>species</th>
+      <th>taxa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+      <td>Neotoma</td>
+      <td>albigula</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+      <td>Neotoma</td>
+      <td>albigula</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>PF</td>
+      <td>M</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>PE</td>
+      <td>F</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Peromyscus</td>
+      <td>eremicus</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>37.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>34.0</td>
+      <td>NaN</td>
+      <td>Dipodomys</td>
+      <td>merriami</td>
+      <td>Rodent</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>6</td>
+      <td>PF</td>
+      <td>F</td>
+      <td>20.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The result DataFrame from a left join (<code class="docutils literal notranslate"><span class="pre">merged_left</span></code>) looks very much like the result DataFrame from an inner join (<code class="docutils literal notranslate"><span class="pre">merged_inner</span></code>) in terms of the columns it contains. However, unlike <code class="docutils literal notranslate"><span class="pre">merged_inner</span></code>, merged_left contains the same number of rows as the original <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> DataFrame. When we inspect <code class="docutils literal notranslate"><span class="pre">merged_left</span></code>, we find there are rows where the information that should have come from <code class="docutils literal notranslate"><span class="pre">species_sub</span> <span class="pre">(i.e.,</span> <span class="pre">species_id,</span> <span class="pre">genus,</span> <span class="pre">and</span> <span class="pre">taxa)</span></code> is missing (they contain NaN values):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged_left</span><span class="p">[</span> <span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">merged_left</span><span class="o">.</span><span class="n">genus</span><span class="p">)</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+      <th>genus</th>
+      <th>species</th>
+      <th>taxa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>PF</td>
+      <td>M</td>
+      <td>14.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>6</td>
+      <td>PF</td>
+      <td>F</td>
+      <td>20.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>These rows are the ones where the value of <code class="docutils literal notranslate"><span class="pre">species_id</span></code> from <code class="docutils literal notranslate"><span class="pre">survey_sub</span></code> (in this case, PF) does not occur in <code class="docutils literal notranslate"><span class="pre">species_sub</span></code>.</p>
+</div>
+<div class="section" id="other-join-types">
+<h2>Other join types<a class="headerlink" href="#other-join-types" title="Permalink to this headline">¶</a></h2>
+<p>The pandas merge function supports two other join types:</p>
+<ul class="simple">
+<li><p>Right (outer) join: Invoked by passing <code class="docutils literal notranslate"><span class="pre">how='right'</span></code> as an argument. Similar to a left join, except all rows from the <code class="docutils literal notranslate"><span class="pre">right</span></code> DataFrame are kept, while rows from the left DataFrame without matching join key(s) values are discarded.</p></li>
+<li><p>Full (outer) join: Invoked by passing <code class="docutils literal notranslate"><span class="pre">how='outer'</span></code> as an argument. This join type returns the all pairwise combinations of rows from both DataFrames; i.e., the result DataFrame will <code class="docutils literal notranslate"><span class="pre">NaN</span></code> where data is missing in one of the dataframes. This join type is very rarely used.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="extra-challenge-1">
+<h1>Extra Challenge 1<a class="headerlink" href="#extra-challenge-1" title="Permalink to this headline">¶</a></h1>
+<p>Create a new DataFrame by joining the contents of the <code class="docutils literal notranslate"><span class="pre">surveys.csv</span></code> and <code class="docutils literal notranslate"><span class="pre">speciesSubset.csv</span></code> tables. Then calculate and plot the distribution of:</p>
+<ol class="simple">
+<li><p>taxa by plot</p></li>
+<li><p>taxa by sex by plot</p></li>
+</ol>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Monash Data Fluency Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

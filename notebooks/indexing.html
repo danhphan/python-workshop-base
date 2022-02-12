@@ -1,0 +1,1690 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Indexing, Slicing and Subsetting &#8212; Monash Data Fluency Introduction to Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Monash Data Fluency Introduction to Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Introduction to Python Workshop
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/indexing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base/issues/new?title=Issue%20on%20page%20%2Fnotebooks/indexing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/indexing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/indexing.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Indexing, Slicing and Subsetting
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Indexing, Slicing and Subsetting
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ensure-the-pandas-package-is-installed">
+     Ensure the Pandas package is installed
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-our-data">
+     Loading our data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexing-and-slicing-in-python">
+     Indexing and Slicing in Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#selecting-data-using-labels-column-headings">
+     Selecting data using Labels (Column Headings)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extracting-range-based-subsets-slicing">
+     Extracting Range based Subsets: Slicing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#challenge-extracting-data">
+     Challenge - Extracting data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solutions-extracting-data">
+     Solutions - Extracting data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-2">
+       Solution #2
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-4-extracting-data">
+       Solution - # 4 - Extracting data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slicing-subsets-of-rows-in-python">
+     Slicing Subsets of Rows in Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slicing-subsets-of-rows-and-columns-in-python">
+     Slicing Subsets of Rows and Columns in Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#challenge-range">
+     Challenge - Range
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-range">
+     Solution - Range
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subsetting-data-using-criteria">
+     Subsetting Data using Criteria
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#python-syntax-cheat-sheet">
+       Python Syntax Cheat Sheet
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#challenge-queries">
+     Challenge - Queries
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-queries">
+     Solution - Queries
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-challenges">
+     Extra Challenges
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-masks-to-identify-a-specific-condition">
+   Using masks to identify a specific condition
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-challenges-putting-it-all-together">
+     <em>
+      Extra Challenges - Putting it all together
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-extra-challenges">
+     Solution
+     <em>
+      Extra Challenges
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Indexing, Slicing and Subsetting</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Indexing, Slicing and Subsetting
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Indexing, Slicing and Subsetting
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ensure-the-pandas-package-is-installed">
+     Ensure the Pandas package is installed
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-our-data">
+     Loading our data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#indexing-and-slicing-in-python">
+     Indexing and Slicing in Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#selecting-data-using-labels-column-headings">
+     Selecting data using Labels (Column Headings)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extracting-range-based-subsets-slicing">
+     Extracting Range based Subsets: Slicing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#challenge-extracting-data">
+     Challenge - Extracting data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solutions-extracting-data">
+     Solutions - Extracting data
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-2">
+       Solution #2
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-4-extracting-data">
+       Solution - # 4 - Extracting data
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slicing-subsets-of-rows-in-python">
+     Slicing Subsets of Rows in Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slicing-subsets-of-rows-and-columns-in-python">
+     Slicing Subsets of Rows and Columns in Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#challenge-range">
+     Challenge - Range
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-range">
+     Solution - Range
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subsetting-data-using-criteria">
+     Subsetting Data using Criteria
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#python-syntax-cheat-sheet">
+       Python Syntax Cheat Sheet
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#challenge-queries">
+     Challenge - Queries
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-queries">
+     Solution - Queries
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-challenges">
+     Extra Challenges
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-masks-to-identify-a-specific-condition">
+   Using masks to identify a specific condition
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-challenges-putting-it-all-together">
+     <em>
+      Extra Challenges - Putting it all together
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution-extra-challenges">
+     Solution
+     <em>
+      Extra Challenges
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="indexing-slicing-and-subsetting">
+<h1>Indexing, Slicing and Subsetting<a class="headerlink" href="#indexing-slicing-and-subsetting" title="Permalink to this headline">¶</a></h1>
+<p><em>Estimated teaching time:</em> 30 min</p>
+<p><em>Estimated challenge time:</em> 30 min</p>
+<p><em>Key questions:</em></p>
+<ul class="simple">
+<li><p>“How can I access specific data within my data set?”</p></li>
+<li><p>“How  can Python and Pandas help me to analyse my data?”</p></li>
+</ul>
+<p><em>Learning objectives:</em></p>
+<ul class="simple">
+<li><p>Describe what 0-based indexing is.</p></li>
+<li><p>Manipulate and extract data using column headings and index locations.</p></li>
+<li><p>Employ slicing to select sets of data from a DataFrame.</p></li>
+<li><p>Employ label and integer-based indexing to select ranges of data in a dataframe.</p></li>
+<li><p>Reassign values within subsets of a DataFrame.</p></li>
+<li><p>Create a copy of a DataFrame.</p></li>
+<li><p>“Query /select a subset of data using a set of criteria using the following operators: =, !=, &gt;, &lt;, &gt;=, &lt;=.”</p></li>
+<li><p>Locate subsets of data using masks.</p></li>
+<li><p>Describe BOOLEAN objects in Python and manipulate data using BOOLEANs.</p></li>
+</ul>
+<hr class="docutils" />
+<p>In this lesson, we will explore <strong>ways to access different parts of the data</strong> in a Pandas DataFrame using:</p>
+<ul class="simple">
+<li><p>Indexing,</p></li>
+<li><p>Slicing, and</p></li>
+<li><p>Subsetting</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>Indexing, Slicing and Subsetting<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>In this lesson, we will explore <strong>ways to access different parts of the data</strong> in a Pandas DataFrame using:</p>
+<ul class="simple">
+<li><p>Indexing,</p></li>
+<li><p>Slicing, and</p></li>
+<li><p>Subsetting</p></li>
+</ul>
+<div class="section" id="ensure-the-pandas-package-is-installed">
+<h2>Ensure the Pandas package is installed<a class="headerlink" href="#ensure-the-pandas-package-is-installed" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install pandas matplotlib
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (1.4.0)
+Requirement already satisfied: matplotlib in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (3.5.1)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2021.3)
+Requirement already satisfied: numpy&gt;=1.18.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (1.22.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2.8.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (4.29.1)
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (9.0.1)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (3.0.7)
+Requirement already satisfied: packaging&gt;=20.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (21.3)
+Requirement already satisfied: six&gt;=1.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas) (1.16.0)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loading-our-data">
+<h2>Loading our data<a class="headerlink" href="#loading-our-data" title="Permalink to this headline">¶</a></h2>
+<p>We will continue to use the surveys dataset that we worked with in the last lesson. Let’s reopen and read in the data again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure pandas is loaded</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Read in the survey CSV</span>
+<span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_22092</span><span class="o">/</span><span class="mf">210192725.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Read in the survey CSV</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span> 
+<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span> 
+<span class="g g-Whitespace">    </span><span class="mi">682</span> 
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span> 
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> 
+<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span> 
+<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span> 
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">789</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>                 <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;surveys.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="indexing-and-slicing-in-python">
+<h2>Indexing and Slicing in Python<a class="headerlink" href="#indexing-and-slicing-in-python" title="Permalink to this headline">¶</a></h2>
+<p>We often want to work with subsets of a <strong>DataFrame</strong> object. There are
+different ways to accomplish this including: using labels (column headings),
+numeric ranges, or specific x,y index locations.</p>
+</div>
+<div class="section" id="selecting-data-using-labels-column-headings">
+<h2>Selecting data using Labels (Column Headings)<a class="headerlink" href="#selecting-data-using-labels-column-headings" title="Permalink to this headline">¶</a></h2>
+<p>We use square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> to select a subset of an Python object. For example,
+we can select all data from a column named <code class="docutils literal notranslate"><span class="pre">species_id</span></code> from the <code class="docutils literal notranslate"><span class="pre">surveys_df</span></code>
+DataFrame by name. There are two ways to do this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Method 1: select a &#39;subset&#39; of the data using the column name</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    NL
+1    NL
+2    DM
+3    DM
+4    DM
+Name: species_id, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Method 2: use the column name as an &#39;attribute&#39;; gives the same output</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">species_id</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    NL
+1    NL
+2    DM
+3    DM
+4    DM
+Name: species_id, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also create a new object that contains only the data within the
+<code class="docutils literal notranslate"><span class="pre">species_id</span></code> column as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates an object, surveys_species, that only contains the `species_id` column</span>
+<span class="n">surveys_species</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can pass a list of column names too, as an index to select columns in that
+order. This is useful when we need to reorganize our data.</p>
+<p><strong>NOTE:</strong> If a column name is not contained in the DataFrame, an exception
+(error) will be raised.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the species and plot columns from the DataFrame</span>
+<span class="n">surveys_df</span><span class="p">[[</span><span class="s1">&#39;species_id&#39;</span><span class="p">,</span> <span class="s1">&#39;site_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>species_id</th>
+      <th>site_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NL</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NL</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>DM</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>DM</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DM</td>
+      <td>3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What happens if you ask for a column that doesn’t exist?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;speciess&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Outputs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">KeyError</span>                                  <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">indexes</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
+   <span class="mi">2392</span>             <span class="k">try</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">2393</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+   <span class="mi">2394</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">pyx</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">IndexEngine</span><span class="o">.</span><span class="n">get_loc</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">5239</span><span class="p">)()</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">pyx</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">IndexEngine</span><span class="o">.</span><span class="n">get_loc</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">5085</span><span class="p">)()</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable_class_helper</span><span class="o">.</span><span class="n">pxi</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">hashtable</span><span class="o">.</span><span class="n">PyObjectHashTable</span><span class="o">.</span><span class="n">get_item</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">20405</span><span class="p">)()</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable_class_helper</span><span class="o">.</span><span class="n">pxi</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">hashtable</span><span class="o">.</span><span class="n">PyObjectHashTable</span><span class="o">.</span><span class="n">get_item</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">20359</span><span class="p">)()</span>
+
+<span class="ne">KeyError</span><span class="p">:</span> <span class="s1">&#39;speciess&#39;</span>
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">KeyError</span>                                  <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="mi">7</span><span class="n">d65fa0158b8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> 
+      <span class="mi">2</span> <span class="c1"># What happens if you ask for a column that doesn&#39;t exist?</span>
+<span class="o">----&gt;</span> <span class="mi">3</span> <span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;speciess&#39;</span><span class="p">]</span>
+      <span class="mi">4</span> 
+
+<span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">frame</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+   <span class="mi">2060</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_multilevel</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+   <span class="mi">2061</span>         <span class="k">else</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">2062</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getitem_column</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+   <span class="mi">2063</span> 
+   <span class="mi">2064</span>     <span class="k">def</span> <span class="nf">_getitem_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+
+<span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">frame</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_getitem_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+   <span class="mi">2067</span>         <span class="c1"># get column</span>
+   <span class="mi">2068</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">is_unique</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">2069</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_item_cache</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+   <span class="mi">2070</span> 
+   <span class="mi">2071</span>         <span class="c1"># duplicate columns &amp; possible reduce dimensionality</span>
+
+<span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">generic</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_item_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+   <span class="mi">1532</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+   <span class="mi">1533</span>         <span class="k">if</span> <span class="n">res</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">1534</span>             <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+   <span class="mi">1535</span>             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_box_item_values</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+   <span class="mi">1536</span>             <span class="n">cache</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+
+<span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">internals</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">fastpath</span><span class="p">)</span>
+   <span class="mi">3588</span> 
+   <span class="mi">3589</span>             <span class="k">if</span> <span class="ow">not</span> <span class="n">isnull</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
+<span class="o">-&gt;</span> <span class="mi">3590</span>                 <span class="n">loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+   <span class="mi">3591</span>             <span class="k">else</span><span class="p">:</span>
+   <span class="mi">3592</span>                 <span class="n">indexer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">))[</span><span class="n">isnull</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)]</span>
+
+<span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">anaconda</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">pandas</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">indexes</span><span class="o">/</span><span class="n">base</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get_loc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
+   <span class="mi">2393</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+   <span class="mi">2394</span>             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+<span class="o">-&gt;</span> <span class="mi">2395</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_maybe_cast_indexer</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+   <span class="mi">2396</span> 
+   <span class="mi">2397</span>         <span class="n">indexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">key</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tolerance</span><span class="p">)</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">pyx</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">IndexEngine</span><span class="o">.</span><span class="n">get_loc</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">5239</span><span class="p">)()</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">pyx</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">IndexEngine</span><span class="o">.</span><span class="n">get_loc</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">5085</span><span class="p">)()</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable_class_helper</span><span class="o">.</span><span class="n">pxi</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">hashtable</span><span class="o">.</span><span class="n">PyObjectHashTable</span><span class="o">.</span><span class="n">get_item</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">20405</span><span class="p">)()</span>
+
+<span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable_class_helper</span><span class="o">.</span><span class="n">pxi</span> <span class="ow">in</span> <span class="n">pandas</span><span class="o">.</span><span class="n">_libs</span><span class="o">.</span><span class="n">hashtable</span><span class="o">.</span><span class="n">PyObjectHashTable</span><span class="o">.</span><span class="n">get_item</span> <span class="p">(</span><span class="n">pandas</span><span class="o">/</span><span class="n">_libs</span><span class="o">/</span><span class="n">hashtable</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="mi">20359</span><span class="p">)()</span>
+
+<span class="ne">KeyError</span><span class="p">:</span> <span class="s1">&#39;speciess&#39;</span>
+</pre></div>
+</div>
+<p>Python tells us what type of error it is in the traceback, at the bottom it says <code class="docutils literal notranslate"><span class="pre">KeyError:</span> <span class="pre">'speciess'</span></code> which means that <code class="docutils literal notranslate"><span class="pre">speciess</span></code> is not a column name (or Key in the related python data type dictionary).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What happens when you flip the order?</span>
+<span class="n">surveys_df</span><span class="p">[[</span><span class="s1">&#39;site_id&#39;</span><span class="p">,</span> <span class="s1">&#39;species_id&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>site_id</th>
+      <th>species_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>NL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>NL</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>DM</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+      <td>DM</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>DM</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="extracting-range-based-subsets-slicing">
+<h2>Extracting Range based Subsets: Slicing<a class="headerlink" href="#extracting-range-based-subsets-slicing" title="Permalink to this headline">¶</a></h2>
+<p><strong>REMINDER</strong>: Python Uses 0-based Indexing</p>
+<p>Let’s remind ourselves that Python uses 0-based
+indexing. This means that the first element in an object is located at position
+0. This is different from other tools like R and Matlab that index elements
+within objects starting at 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of numbers:</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="indexing diagram" src="../_images/slicing-indexing.svg" />
+<img alt="slicing diagram" src="../_images/slicing-slicing.svg" /></p>
+</div>
+<div class="section" id="challenge-extracting-data">
+<h2>Challenge - Extracting data<a class="headerlink" href="#challenge-extracting-data" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>What value does the code <strong>a[0]</strong> return?</p></li>
+<li><p>How about this: <strong>a[5]</strong></p></li>
+<li><p>In the example above, calling <code class="docutils literal notranslate"><span class="pre">a[5]</span></code> returns an error. Why is that?</p></li>
+<li><p>What about <strong>a[len(a)]</strong> ?</p></li>
+</ol>
+</div>
+<div class="section" id="solutions-extracting-data">
+<h2>Solutions - Extracting data<a class="headerlink" href="#solutions-extracting-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution #2</span>
+<span class="c1"># a[5]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="solution-2">
+<h3>Solution #2<a class="headerlink" href="#solution-2" title="Permalink to this headline">¶</a></h3>
+<p>In above example, the error says <code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">index</span> <span class="pre">out</span> <span class="pre">of</span> <span class="pre">range</span></code>. This means we don’t have index 5 in our list. The maximum index for <code class="docutils literal notranslate"><span class="pre">a</span></code> is <code class="docutils literal notranslate"><span class="pre">4</span></code>, as indexing starts at <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution #3</span>
+<span class="c1"># a[len(a)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="solution-4-extracting-data">
+<h3>Solution - # 4 - Extracting data<a class="headerlink" href="#solution-4-extracting-data" title="Permalink to this headline">¶</a></h3>
+<p>This also gives an error, because len(a) is <code class="docutils literal notranslate"><span class="pre">5</span></code> which is not the maximum index</p>
+</div>
+</div>
+<div class="section" id="slicing-subsets-of-rows-in-python">
+<h2>Slicing Subsets of Rows in Python<a class="headerlink" href="#slicing-subsets-of-rows-in-python" title="Permalink to this headline">¶</a></h2>
+<p>Slicing using the <code class="docutils literal notranslate"><span class="pre">[]</span></code> operator selects a set of rows and/or columns from a
+DataFrame. To slice out a set of rows, you use the following syntax:
+<code class="docutils literal notranslate"><span class="pre">data[start:stop]</span></code>. When slicing in pandas the start bound is included in the
+output. The stop bound is one step BEYOND the row you want to select. So if you
+want to select rows 0, 1 and 2 your code would look like this with our <code class="docutils literal notranslate"><span class="pre">surveys</span> <span class="pre">data</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select rows 0, 1, 2 (row 3 is not selected)</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The stop bound in Python is different from what you might be used to in
+languages like Matlab and R.</p>
+<p>Now lets select the <code class="docutils literal notranslate"><span class="pre">first</span> <span class="pre">5</span> <span class="pre">rows</span> <span class="pre">(rows</span> <span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the last element in the list</span>
+<span class="c1"># (the slice starts at the last element, and ends at the end of the list)</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>35548</th>
+      <td>35549</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We can also reassign values within subsets of our DataFrame.</p>
+<p>Let’s create a brand new clean dataframe from
+the original data CSV file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="slicing-subsets-of-rows-and-columns-in-python">
+<h2>Slicing Subsets of Rows and Columns in Python<a class="headerlink" href="#slicing-subsets-of-rows-and-columns-in-python" title="Permalink to this headline">¶</a></h2>
+<p>We can select specific ranges of our data in both the row and column directions
+using either label or integer-based indexing.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">loc</span></code> is primarily <em>label</em> based indexing. <em>Integers</em> may be used but
+they are interpreted as a <em>label</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iloc</span></code> is primarily <em>integer</em> based indexing</p></li>
+</ul>
+<p>To select a subset of rows <strong>and</strong> columns from our DataFrame, we can use the
+<code class="docutils literal notranslate"><span class="pre">iloc</span></code> method. For example, we can select month, day and year (columns 2, 3
+and 4 if we start counting at 1), like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">iloc[row</span> <span class="pre">slicing,</span> <span class="pre">column</span> <span class="pre">slicing]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Notice that we asked for a slice from 0:3. This yielded 3 rows of data. When you
+ask for 0:3, you are actually telling Python to start at index 0 and select rows
+0, 1, 2 <strong>up to but not including 3</strong>.</p>
+<p>Let’s explore some other ways to index and select subsets of data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select all columns for rows of index values 0 and 10</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>5</td>
+      <td>DS</td>
+      <td>F</td>
+      <td>53.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What does this do?</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">,</span> <span class="s1">&#39;site_id&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>species_id     NL
+site_id         2
+weight        NaN
+Name: 0, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What happens when you uncomment and run the code below?</span>
+<span class="c1"># surveys_df.loc[[0, 10, 35549], :]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTE</strong>: Labels must be found in the DataFrame or you will get a <code class="docutils literal notranslate"><span class="pre">KeyError</span></code>.</p>
+<p>Indexing by labels <code class="docutils literal notranslate"><span class="pre">loc</span></code> differs from indexing by integers <code class="docutils literal notranslate"><span class="pre">iloc</span></code>.
+With <code class="docutils literal notranslate"><span class="pre">loc</span></code>, the both start bound and the stop bound are <strong>inclusive</strong>. When using
+<code class="docutils literal notranslate"><span class="pre">loc</span></code>, integers <em>can</em> be used, but the integers refer to the
+index label and not the position. For example, using <code class="docutils literal notranslate"><span class="pre">loc</span></code> and select 1:4
+will get a different result than using <code class="docutils literal notranslate"><span class="pre">iloc</span></code> to select rows 1:4.</p>
+<p>We can also select a specific data value using a row and
+column location within the DataFrame and <code class="docutils literal notranslate"><span class="pre">iloc</span></code> indexing:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Syntax for iloc indexing to finding a specific data element</span>
+<span class="n">dat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In following iloc example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember that Python indexing begins at 0. So, the index location [2, 6]
+selects the element that is 3 rows down and 7 columns over in the DataFrame.</p>
+</div>
+<div class="section" id="challenge-range">
+<h2>Challenge - Range<a class="headerlink" href="#challenge-range" title="Permalink to this headline">¶</a></h2>
+<ol>
+<li><p>What happens when you execute:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- `surveys_df[0:1]`
+- `surveys_df[:4]`
+- `surveys_df[:-1]`
+</pre></div>
+</div>
+</li>
+<li><p>What happens when you call:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- `surveys_df.iloc[0:4, 1:4]`
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="solution-range">
+<h2>Solution - Range<a class="headerlink" href="#solution-range" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - Range - #1 (a)</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - Range - #1 (b)</span>
+<span class="n">surveys_df</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - Range - #1 (c)</span>
+<span class="n">surveys_df</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - Range - #2</span>
+<span class="n">surveys_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="subsetting-data-using-criteria">
+<h2>Subsetting Data using Criteria<a class="headerlink" href="#subsetting-data-using-criteria" title="Permalink to this headline">¶</a></h2>
+<p>We can also select a subset of our data using criteria. For example, we can
+select all rows that <code class="docutils literal notranslate"><span class="pre">have</span> <span class="pre">a</span> <span class="pre">year</span> <span class="pre">value</span> <span class="pre">of</span> <span class="pre">2002</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2002</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or we can select all rows that <code class="docutils literal notranslate"><span class="pre">do</span> <span class="pre">not</span> <span class="pre">contain</span> <span class="pre">the</span> <span class="pre">year</span> <span class="pre">2002</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span> <span class="o">!=</span> <span class="mi">2002</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can define sets of criteria too:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span> <span class="o">&gt;=</span> <span class="mi">1980</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span> <span class="o">&lt;=</span> <span class="mi">1985</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="python-syntax-cheat-sheet">
+<h3>Python Syntax Cheat Sheet<a class="headerlink" href="#python-syntax-cheat-sheet" title="Permalink to this headline">¶</a></h3>
+<p>Use can use the syntax below when querying data by criteria from a DataFrame.
+Experiment with selecting various subsets of the “surveys” data.</p>
+<ul class="simple">
+<li><p>Equals: <code class="docutils literal notranslate"><span class="pre">==</span></code></p></li>
+<li><p>Not equals: <code class="docutils literal notranslate"><span class="pre">!=</span></code></p></li>
+<li><p>Greater than, less than: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></li>
+<li><p>Greater than or equal to <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></li>
+<li><p>Less than or equal to <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="challenge-queries">
+<h2>Challenge - Queries<a class="headerlink" href="#challenge-queries" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Select a subset of rows in the <code class="docutils literal notranslate"><span class="pre">surveys_df</span></code> DataFrame that contain data from
+the year 1999 and that contain weight values less than or equal to 8. How
+many rows did you end up with? What did your neighbor get?</p></li>
+<li><p><strong>(Extra)</strong> Use the <code class="docutils literal notranslate"><span class="pre">isin</span></code> function to find all plots that contain <code class="docutils literal notranslate"><span class="pre">PB</span></code> and <code class="docutils literal notranslate"><span class="pre">PL</span></code> species
+in the “surveys” DataFrame. How many records contain these values?</p></li>
+</ol>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">isin</span></code> command in Python to query a DataFrame based upon a
+list of values as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">listGoesHere</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="solution-queries">
+<h2>Solution - Queries<a class="headerlink" href="#solution-queries" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Solution - Queries #1</span>
+<span class="n">surveys_df</span><span class="p">[(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1999</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># when only interested in how many, the sum of True values could be used as well: </span>
+<span class="nb">sum</span><span class="p">((</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1999</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - Queries #2</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;PB&#39;</span><span class="p">,</span> <span class="s1">&#39;PL&#39;</span><span class="p">])][</span><span class="s1">&#39;site_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To get number of records</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;species_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;PB&#39;</span><span class="p">,</span> <span class="s1">&#39;PL&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="extra-challenges">
+<h2>Extra Challenges<a class="headerlink" href="#extra-challenges" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><strong>(Extra)</strong> Create a query that finds all rows with a
+weight value greater than (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>) or equal to 0.</p></li>
+<li><p><strong>(Extra)</strong> The <code class="docutils literal notranslate"><span class="pre">~</span></code> symbol in Python can be used to return the OPPOSITE of the
+selection that you specify in Python. It is equivalent to <strong>is not in</strong>.
+Write a query that selects all rows with sex NOT equal to ‘M’ or ‘F’ in
+the “surveys” data.</p></li>
+</ol>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="o">~</span><span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="using-masks-to-identify-a-specific-condition">
+<h1>Using masks to identify a specific condition<a class="headerlink" href="#using-masks-to-identify-a-specific-condition" title="Permalink to this headline">¶</a></h1>
+<p>A <strong>mask</strong> can be useful to locate where a particular subset of values exist or
+don’t exist - for example,  NaN, or “Not a Number” values. To understand masks,
+we also need to understand <code class="docutils literal notranslate"><span class="pre">BOOLEAN</span></code> objects in Python.</p>
+<p>Boolean values include <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set x to 5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What does the code below return?</span>
+<span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How about this?</span>
+<span class="n">x</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="extra-challenges-putting-it-all-together">
+<h2><em>Extra Challenges - Putting it all together</em><a class="headerlink" href="#extra-challenges-putting-it-all-together" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Create a new DataFrame that only contains observations with sex values that
+are <strong>not</strong> female or male. Assign each sex value in the new DataFrame to a
+new value of ‘x’. Determine the number of null values in the subset.</p></li>
+<li><p>Create a new DataFrame that contains only observations that are of sex male
+or female and where weight values are greater than 0. Create a stacked bar
+plot of average weight by plot with male vs female values stacked for each
+plot.</p></li>
+<li><p>Count the number of missing values per column. Hint: The method .count() gives you the number of non-NA observations per column.</p></li>
+</ol>
+</div>
+<div class="section" id="solution-extra-challenges">
+<h2>Solution <em>Extra Challenges</em><a class="headerlink" href="#solution-extra-challenges" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution extra challenge 1</span>
+<span class="n">new</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="o">~</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">])]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">new</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;x&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can verify the number of NaN values with</span>
+<span class="nb">sum</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution extra challenge 2</span>
+
+<span class="c1"># selection of the data with isin</span>
+<span class="n">stack_selection</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]))</span> <span class="o">&amp;</span>
+							<span class="n">surveys_df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">][[</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="s2">&quot;site_id&quot;</span><span class="p">]]</span>
+
+<span class="c1"># calculate the mean weight for each site id and sex combination:</span>
+<span class="n">stack_selection</span> <span class="o">=</span> <span class="n">stack_selection</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;site_id&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+
+<span class="c1"># Plot inside jupyter notebook</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># and we can make a stacked bar plot from this:</span>
+<span class="n">stack_selection</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Monash Data Fluency Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

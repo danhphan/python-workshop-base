@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Defensive Programming &#8212; Monash Data Fluency Introduction to Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Monash Data Fluency Introduction to Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Introduction to Python Workshop
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/defensive_programming.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base/issues/new?title=Issue%20on%20page%20%2Fnotebooks/defensive_programming.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/defensive_programming.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/defensive_programming.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Defensive Programming
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-information">
+   Module information
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Defensive Programming
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assertions">
+   Assertions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-driven-development">
+     Test-Driven Development
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-points">
+   Key points
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Defensive Programming</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Defensive Programming
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-information">
+   Module information
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Defensive Programming
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#assertions">
+   Assertions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#test-driven-development">
+     Test-Driven Development
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#key-points">
+   Key points
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="defensive-programming">
+<h1>Defensive Programming<a class="headerlink" href="#defensive-programming" title="Permalink to this headline">¶</a></h1>
+<p><em>Estimated teaching time:</em> 30 min</p>
+<p><em>Estimated challenge time:</em> 0 min</p>
+</div>
+<div class="section" id="module-information">
+<h1>Module information<a class="headerlink" href="#module-information" title="Permalink to this headline">¶</a></h1>
+<p><em>Key questions:</em></p>
+<ul class="simple">
+<li><p>“How can I make my programs more reliable?”</p></li>
+</ul>
+<p><em>Learning objectives:</em></p>
+<ul class="simple">
+<li><p>Explain what an assertion is.</p></li>
+<li><p>Add assertions that check the program’s state is correct.</p></li>
+<li><p>Correctly add precondition and postcondition assertions to functions.</p></li>
+<li><p>Explain what test-driven development is, and use it when creating new functions.</p></li>
+<li><p>Explain why variables should be initialized using actual data values rather than arbitrary constants.</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="id1">
+<h1>Defensive Programming<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Our previous lessons have introduced the basic tools of programming: variables and lists, file operations, data visualisation, loops, conditionals, and functions. What they haven’t done is show us how to tell whether a program is getting the right answer, and how to tell if it’s still getting the right answer as we make changes to it.</p>
+<p>To achieve that, we need to:</p>
+<ul class="simple">
+<li><p>Write programs that check their own operation.</p></li>
+<li><p>Write and run tests for widely-used functions.</p></li>
+<li><p>Make sure we know what “correct” actually means.</p></li>
+</ul>
+<p>The good news is, doing these things will speed up our programming, not slow it down. As in real carpentry — the kind done with lumber — the time saved by measuring carefully before cutting a piece of wood is much greater than the time that measuring takes.</p>
+</div>
+<div class="section" id="assertions">
+<h1>Assertions<a class="headerlink" href="#assertions" title="Permalink to this headline">¶</a></h1>
+<p>The first step toward getting the right answers from our programs is to assume that mistakes will happen and to guard against them. This is called defensive programming, and the most common way to do it is to add assertions to our code so that it checks itself as it runs. An assertion is simply a statement that something must be true at a certain point in a program. When Python sees one, it evaluates the assertion’s condition. If it’s true, Python does nothing, but if it’s false, Python halts the program immediately and prints the error message if one is provided. For example, this piece of code halts as soon as the loop encounters a value that isn’t positive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">]</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Data should only contain positive values&#39;</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total is:&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">091518</span><span class="n">d2f2e2</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">3</span> <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+      <span class="mi">4</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+<span class="o">----&gt;</span> <span class="mi">5</span>     <span class="k">assert</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;Data should only contain positive values&#39;</span>
+      <span class="mi">6</span>     <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+      <span class="mi">7</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;total is:&#39;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Data</span> <span class="n">should</span> <span class="n">only</span> <span class="n">contain</span> <span class="n">positive</span> <span class="n">values</span>
+
+</pre></div>
+</div>
+<p>Programs like the Firefox browser are full of assertions: 10-20% of the code they contain are there to check that the other 80–90% are working correctly. Broadly speaking, assertions fall into three categories:</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">precondition</span></code> is something that must be true at the start of a function in order for it to work correctly.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">postcondition</span></code> is something that the function guarantees is true when it finishes.</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">invariant</span></code> is something that is always true at a particular point inside a piece of code.</p>
+<p>For example, suppose we are representing rectangles using a <code class="docutils literal notranslate"><span class="pre">tuple</span></code> of four coordinates <code class="docutils literal notranslate"><span class="pre">(x0,</span> <span class="pre">y0,</span> <span class="pre">x1,</span> <span class="pre">y1)</span></code>, representing the lower left and upper right corners of the rectangle. In order to do some calculations, we need to normalize the rectangle so that the lower left corner is at the origin and the longest side is 1.0 units long. This function does that, but checks that its input is correctly formatted and that its result makes sense:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">normalize_rectangle</span><span class="p">(</span><span class="n">rect</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Normalizes a rectangle so that it is at the origin and 1.0 units long on its longest axis.</span>
+<span class="sd">    Input should be of the format (x0, y0, x1, y1).</span>
+<span class="sd">    (x0, y0) and (x1, y1) define the lower left and upper right corners</span>
+<span class="sd">    of the rectangle, respectively.&#39;&#39;&#39;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Rectangles must contain 4 coordinates&#39;</span>
+    <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">rect</span>
+    <span class="k">assert</span> <span class="n">x0</span> <span class="o">&lt;</span> <span class="n">x1</span><span class="p">,</span> <span class="s1">&#39;Invalid X coordinates&#39;</span>
+    <span class="k">assert</span> <span class="n">y0</span> <span class="o">&lt;</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;Invalid Y coordinates&#39;</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">-</span> <span class="n">x0</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">-</span> <span class="n">y0</span>
+    <span class="k">if</span> <span class="n">dx</span> <span class="o">&gt;</span> <span class="n">dy</span><span class="p">:</span>
+        <span class="n">scaled</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
+        <span class="n">upper_x</span><span class="p">,</span> <span class="n">upper_y</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">scaled</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">scaled</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">/</span> <span class="n">dy</span>
+        <span class="n">upper_x</span><span class="p">,</span> <span class="n">upper_y</span> <span class="o">=</span> <span class="n">scaled</span><span class="p">,</span> <span class="mf">1.0</span>
+
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">upper_x</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Calculated upper X coordinate invalid&#39;</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">upper_y</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Calculated upper Y coordinate invalid&#39;</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upper_x</span><span class="p">,</span> <span class="n">upper_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The preconditions on lines 3, 5, and 6 catch invalid inputs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="p">))</span> <span class="c1"># missing the fourth coordinate</span>
+
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">1</span><span class="n">b9cd8e18a1f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="p">))</span> <span class="c1"># missing the fourth coordinate</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">c94cf5b065b9</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">normalize_rectangle</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+      <span class="mi">4</span>     <span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span> <span class="n">define</span> <span class="n">the</span> <span class="n">lower</span> <span class="n">left</span> <span class="ow">and</span> <span class="n">upper</span> <span class="n">right</span> <span class="n">corners</span>
+      <span class="mi">5</span>     <span class="n">of</span> <span class="n">the</span> <span class="n">rectangle</span><span class="p">,</span> <span class="n">respectively</span><span class="o">.</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">----&gt; 6     assert len(rect) == 4, &#39;Rectangles must contain 4 coordinates&#39;</span>
+<span class="s1">      7     x0, y0, x1, y1 = rect</span>
+<span class="s1">      8     assert x0 &lt; x1, &#39;Invalid X coordinates&#39;</span>
+
+<span class="s1">AssertionError: Rectangles must contain 4 coordinates</span>
+
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span> <span class="p">))</span> <span class="c1"># X axis inverted</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">4</span><span class="o">-</span><span class="mi">325036405532</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span> <span class="p">))</span> <span class="c1"># X axis inverted</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">c94cf5b065b9</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">normalize_rectangle</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+      <span class="mi">6</span>     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;Rectangles must contain 4 coordinates&#39;</span>
+      <span class="mi">7</span>     <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">rect</span>
+<span class="o">----&gt;</span> <span class="mi">8</span>     <span class="k">assert</span> <span class="n">x0</span> <span class="o">&lt;</span> <span class="n">x1</span><span class="p">,</span> <span class="s1">&#39;Invalid X coordinates&#39;</span>
+      <span class="mi">9</span>     <span class="k">assert</span> <span class="n">y0</span> <span class="o">&lt;</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;Invalid Y coordinates&#39;</span>
+     <span class="mi">10</span> 
+
+<span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Invalid</span> <span class="n">X</span> <span class="n">coordinates</span>
+
+</pre></div>
+</div>
+<p>The post-conditions on lines 17 and 18 help us catch bugs by telling us when our calculations cannot have been correct. For example, if we normalize a rectangle that is taller than it is wide everything seems OK:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span> <span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 0, 0.2, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>but if we normalize one that’s wider than it is tall, the assertion is triggered:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mi">8</span><span class="n">d4a48f1d068</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">print</span><span class="p">(</span><span class="n">normalize_rectangle</span><span class="p">(</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">))</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="n">c94cf5b065b9</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">normalize_rectangle</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+     <span class="mi">19</span> 
+     <span class="mi">20</span>     <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">upper_x</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Calculated upper X coordinate invalid&#39;</span>
+<span class="o">---&gt;</span> <span class="mi">21</span>     <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">upper_y</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Calculated upper Y coordinate invalid&#39;</span>
+     <span class="mi">22</span> 
+     <span class="mi">23</span>     <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">upper_x</span><span class="p">,</span> <span class="n">upper_y</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span><span class="p">:</span> <span class="n">Calculated</span> <span class="n">upper</span> <span class="n">Y</span> <span class="n">coordinate</span> <span class="n">invalid</span>
+
+</pre></div>
+</div>
+<p>Re-reading our function, we realize that line 11 should divide <code class="docutils literal notranslate"><span class="pre">dy</span></code> by <code class="docutils literal notranslate"><span class="pre">dx</span></code> rather than <code class="docutils literal notranslate"><span class="pre">dx</span></code> by <code class="docutils literal notranslate"><span class="pre">dy</span></code>.  If we had left out the assertion at the end of the function, we would have created and returned something that had the right shape as a valid answer, but wasn’t. Detecting and debugging that would almost certainly have taken more time in the long run than writing the assertion.</p>
+<p>But assertions aren’t just about catching errors: they also help people understand programs. Each assertion gives the person reading the program a chance to check (consciously or otherwise) that their understanding matches what the code is doing.</p>
+<p>Most good programmers follow two rules when adding assertions to their code. The first is, fail early, fail often. The greater the distance between when and where an error occurs and when it’s noticed, the harder the error will be to debug, so good code catches mistakes as early as possible.</p>
+<p>The second rule is, turn bugs into assertions or tests. Whenever you fix a bug, write an assertion that catches the mistake should you make it again. If you made a mistake in a piece of code, the odds are good that you have made other mistakes nearby, or will make the same mistake (or a related one) the next time you change it. Writing assertions to check that you haven’t regressed (i.e., haven’t re-introduced an old problem) can save a lot of time in the long run, and helps to warn people who are reading the code (including your future self) that this bit is tricky.</p>
+<div class="section" id="test-driven-development">
+<h2>Test-Driven Development<a class="headerlink" href="#test-driven-development" title="Permalink to this headline">¶</a></h2>
+<p>An assertion checks that something is true at a particular point in the program. The next step is to check the overall behavior of a piece of code, i.e., to make sure that it produces the right output when it’s given a particular input. For example, suppose we need to find where two or more time series overlap. The range of each time series is represented as a pair of numbers, which are the time the interval started and ended. The output is the largest range that they all include:</p>
+<p><img alt="test diagram" src="../_images/testing.svg" /></p>
+<p>Most novice programmers would solve this problem like this:</p>
+<ol class="simple">
+<li><p>Write a function <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code>.</p></li>
+<li><p>Call it interactively on two or three different inputs.</p></li>
+<li><p>If it produces the wrong answer, fix the function and re-run that test.</p></li>
+</ol>
+<p>This clearly works — after all, thousands of scientists are doing it right now — but there’s a better way:</p>
+<ol class="simple">
+<li><p>Write a short function for each test.</p></li>
+<li><p>Write a <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code> function that should pass those tests.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code> produces any wrong answers, fix it and re-run the test functions.</p></li>
+</ol>
+<p>Writing the tests before writing the function they exercise is called <code class="docutils literal notranslate"><span class="pre">test-driven</span> <span class="pre">development</span></code> (TDD). Its advocates believe it produces better code faster because:</p>
+<ol class="simple">
+<li><p>If people write tests after writing the thing to be tested, they are subject to confirmation bias, i.e., they subconsciously write tests to show that their code is correct, rather than to find errors.</p></li>
+<li><p>Writing tests helps programmers figure out what the function is actually supposed to do.</p></li>
+</ol>
+<p>Here are three test functions for <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="n">dc16b942c085</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+      <span class="mi">2</span> <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+      <span class="mi">3</span> <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;range_overlap&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+</div>
+<p>The error is actually reassuring: we haven’t written <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code> yet, so if the tests passed, it would be a sign that someone else had and that we were accidentally using their function.</p>
+<p>And as a bonus of writing these tests, we’ve implicitly defined what our input and output look like: we expect a list of pairs as input, and produce a single pair as output.</p>
+<p>Something important is missing, though. We don’t have any tests for the case where the ranges don’t overlap at all:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>assert range_overlap([ (0.0, 1.0), (5.0, 6.0) ]) == ???
+</pre></div>
+</div>
+<p>What should <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code> do in this case: fail with an error message, produce a special value like <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.0)</span></code> to signal that there’s no overlap, or <em>something</em> else? Any actual implementation of the function will do one of these things; writing the tests first helps us figure out which is <em>best before</em> we’re emotionally invested in whatever we happened to write before we realized there was an issue.</p>
+<p>And what about this case?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>assert range_overlap([ (0.0, 1.0), (1.0, 2.0) ]) == ???
+</pre></div>
+</div>
+<p>Do two segments that touch at their endpoints overlap or not? Mathematicians usually say “yes”, but engineers usually say “no”. The best answer is “whatever is most useful in the rest of our program”, but again, any actual implementation of <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code> is going to do <em>something</em>, and whatever it is ought to be consistent with what it does when there’s no overlap at all.</p>
+<p>Since we’re planning to use the range this function returns as the X axis in a time series chart, we decide that:</p>
+<ol class="simple">
+<li><p>every overlap has to have non-zero width, and</p></li>
+<li><p>we will return the special value None when there’s no overlap.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">None</span></code> is built into Python, and means “nothing here”. (Other languages often call the equivalent value <code class="docutils literal notranslate"><span class="pre">null</span></code> or <code class="docutils literal notranslate"><span class="pre">nil</span></code>). With that decision made, we can finish writing our last two tests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+<span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">13</span><span class="o">-</span><span class="mi">42</span><span class="n">de7ddfb428</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+      <span class="mi">2</span> <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;range_overlap&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+</div>
+<p>Again, we get an error because we haven’t written our function, but we’re now ready to do so:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">range_overlap</span><span class="p">(</span><span class="n">ranges</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return common overlap among a set of [low, high] ranges.&#39;&#39;&#39;</span>
+    <span class="n">lowest</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">highest</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ranges</span><span class="p">:</span>
+        <span class="n">lowest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lowest</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
+        <span class="n">highest</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">highest</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">lowest</span><span class="p">,</span> <span class="n">highest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Take a moment to think about why we use <code class="docutils literal notranslate"><span class="pre">max</span></code> to raise <code class="docutils literal notranslate"><span class="pre">lowest</span></code> and <code class="docutils literal notranslate"><span class="pre">min</span></code> to lower <code class="docutils literal notranslate"><span class="pre">highest</span></code>). We’d now like to re-run our tests, but they’re scattered across three different cells. To make running them easier, let’s put them all in a function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_range_overlap</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now test <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code> with a single function call:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_range_overlap</span><span class="p">()</span> 
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span>                            <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">16</span><span class="o">-</span><span class="mi">80290759369</span><span class="n">d</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">test_range_overlap</span><span class="p">()</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">15</span><span class="o">-</span><span class="n">d61f343ad67a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="n">test_range_overlap</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="k">def</span> <span class="nf">test_range_overlap</span><span class="p">():</span>
+<span class="o">----&gt;</span> <span class="mi">2</span>     <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+      <span class="mi">3</span>     <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">None</span>
+      <span class="mi">4</span>     <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+      <span class="mi">5</span>     <span class="k">assert</span> <span class="n">range_overlap</span><span class="p">([</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span> <span class="p">])</span> <span class="o">==</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+
+<span class="ne">AssertionError</span><span class="p">:</span> 
+</pre></div>
+</div>
+<p>The first test that was supposed to produce <code class="docutils literal notranslate"><span class="pre">None</span></code> fails, so we know something is wrong with our function. We don’t know whether the other tests passed or failed because Python halted the program as soon as it spotted the first error. Still, some information is better than none, and if we trace the behavior of the function with that input, we realize that we’re initializing <code class="docutils literal notranslate"><span class="pre">lowest</span></code> and <code class="docutils literal notranslate"><span class="pre">highest</span></code> to 0.0 and 1.0 respectively, regardless of the input values. This violates another important rule of programming: always initialize from data.</p>
+<p>Fix <code class="docutils literal notranslate"><span class="pre">range_overlap</span></code>. Re-run <code class="docutils literal notranslate"><span class="pre">test_range_overlap</span></code> after each change you make.</p>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="k">def</span> <span class="nf">range_overlap</span><span class="p">(</span><span class="n">ranges</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Return common overlap among a set of [low, high] ranges.&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ranges</span><span class="p">:</span>
+        <span class="c1"># ranges is None or an empty list</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">lowest</span><span class="p">,</span> <span class="n">highest</span> <span class="o">=</span> <span class="n">ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="n">lowest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lowest</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span>
+        <span class="n">highest</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">highest</span><span class="p">,</span> <span class="n">high</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">lowest</span> <span class="o">&gt;=</span> <span class="n">highest</span><span class="p">:</span>  <span class="c1"># no overlap</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">lowest</span><span class="p">,</span> <span class="n">highest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="key-points">
+<h1>Key points<a class="headerlink" href="#key-points" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Program defensively, i.e., assume that errors are going to arise, and write code to detect them when they do.</p></li>
+<li><p>Put assertions in programs to check their state as they run, and to help readers understand how those programs are supposed to work.</p></li>
+<li><p>Use preconditions to check that the inputs to a function are safe to use.</p></li>
+<li><p>Use postconditions to check that the output from a function is safe to use.</p></li>
+<li><p>Write tests before writing code in order to help determine exactly what that code is supposed to do.</p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Monash Data Fluency Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

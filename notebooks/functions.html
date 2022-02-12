@@ -1,0 +1,1368 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reusable and modular code with functions &#8212; Monash Data Fluency Introduction to Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Monash Data Fluency Introduction to Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Introduction to Python Workshop
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base/issues/new?title=Issue%20on%20page%20%2Fnotebooks/functions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/functions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/functions.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instructor-notes">
+   Instructor notes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-functions">
+   Challenge - Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonus-challenges">
+     Bonus challenges
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-functions">
+   Solutions - Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aside-listing-files-and-the-os-module">
+     Aside - listing files and the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       os
+      </span>
+     </code>
+     module
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-more-functions">
+   Challenge - More Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-more-functions">
+   Solutions - More Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-experimenting-with-keyword-arguments">
+   Challenge - Experimenting with keyword arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-experimenting-with-keyword-arguments">
+   Solutions - Experimenting with keyword arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditionals-if-statements">
+   Conditionals -
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+   </code>
+   statements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-choice-challenge">
+   Multiple choice challenge
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-challenge-modifying-functions">
+   Bonus Challenge - Modifying functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-modifying-functions">
+   Solutions - Modifying functions
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Reusable and modular code with functions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instructor-notes">
+   Instructor notes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-functions">
+   Challenge - Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bonus-challenges">
+     Bonus challenges
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-functions">
+   Solutions - Functions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#aside-listing-files-and-the-os-module">
+     Aside - listing files and the
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       os
+      </span>
+     </code>
+     module
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-more-functions">
+   Challenge - More Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-more-functions">
+   Solutions - More Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-experimenting-with-keyword-arguments">
+   Challenge - Experimenting with keyword arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-experimenting-with-keyword-arguments">
+   Solutions - Experimenting with keyword arguments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conditionals-if-statements">
+   Conditionals -
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+   </code>
+   statements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-choice-challenge">
+   Multiple choice challenge
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bonus-challenge-modifying-functions">
+   Bonus Challenge - Modifying functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solutions-modifying-functions">
+   Solutions - Modifying functions
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="reusable-and-modular-code-with-functions">
+<h1>Reusable and modular code with functions<a class="headerlink" href="#reusable-and-modular-code-with-functions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="instructor-notes">
+<h2>Instructor notes<a class="headerlink" href="#instructor-notes" title="Permalink to this headline">¶</a></h2>
+<p><em>Estimated teaching time:</em> 30 min</p>
+<p><em>Estimated challenge time:</em> 0 min</p>
+<p><em>Key questions:</em></p>
+<p><em>Learning objectives:</em></p>
+<ul class="simple">
+<li><p>“Build reusable code in Python.”</p></li>
+<li><p>“Write functions using conditional statements (if, then, else)”</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>Functions wrap up reusable pieces of code - they help you apply the <em>Do Not Repeat Yourself</em> (DRY) principle.</p>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># The body of the function is indicated by indenting by 4 spaces.</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">square</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hyphenate</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="c1"># return statements immediately return a value (or None if no value is given)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="c1"># Any code in the function after the return statement does not get executed.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We will never get here&quot;</span><span class="p">)</span>
+
+<span class="n">hyphenate</span><span class="p">(</span><span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;esque&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;python-esque&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Suppose that separating large data files into individual yearly files is a task that we frequently have to perform. We could write a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop like the one above every time we needed to do it but that would be time consuming and error prone. A more elegant solution would be to create a reusable tool that performs this task with minimum input from the user. To do this, we are going to turn the code we’ve already written into a function.</p>
+<p>Functions are reusable, self-contained pieces of code that are called with a single command. They can be designed to accept arguments as input and return values, but they don’t need to do either. Variables declared inside functions only exist while the function is running and if a variable within the function (a local variable) has the same name as a variable somewhere else in the code, the local variable hides but doesn’t overwrite the other.</p>
+<p>Every method used in Python (for example, <code class="docutils literal notranslate"><span class="pre">print</span></code>) is a function, and the libraries we import (say, <code class="docutils literal notranslate"><span class="pre">pandas</span></code>) are a collection of functions. We will only use functions that are housed within the same code that uses them, but it’s also easy to write functions that can be used by different programs.</p>
+<p>Functions are declared following this general structure:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">this_is_the_function_name</span><span class="p">(</span><span class="n">input_argument1</span><span class="p">,</span> <span class="n">input_argument2</span><span class="p">):</span>
+
+    <span class="c1"># The body of the function is indented</span>
+    <span class="c1"># This function prints the two arguments to screen</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">input_argument1</span><span class="p">,</span> <span class="n">input_argument2</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># And returns their product</span>
+    <span class="k">return</span> <span class="n">input_argument1</span> <span class="o">*</span> <span class="n">input_argument2</span>
+</pre></div>
+</div>
+<p>The function declaration starts with the word <code class="docutils literal notranslate"><span class="pre">def</span></code>, followed by the function name and any arguments in parenthesis, and ends in a colon. The body of the function is indented just like loops are. If the function returns something when it is called, it includes a return statement at the end.</p>
+<p>Let’s rewrite this function with shorter (but still informative) names so we don’t need to type as much:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is how we call the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">product_of_inputs</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The function arguments are: 2 5 (this is done inside the function!)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Their product is:&#39;</span><span class="p">,</span> <span class="n">product_of_inputs</span><span class="p">,</span> <span class="s1">&#39;(this is done outside the function!)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Their product is: 10 (this is done outside the function!)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="challenge-functions">
+<h2>Challenge - Functions<a class="headerlink" href="#challenge-functions" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Change the values of the input arguments in the function and check its output.</p></li>
+<li><p>Try calling the function by giving it the wrong number of arguments (not 2) or not assigning the function call to a variable (no <code class="docutils literal notranslate"><span class="pre">product_of_inputs</span> <span class="pre">=</span></code>).</p></li>
+</ol>
+<div class="section" id="bonus-challenges">
+<h3>Bonus challenges<a class="headerlink" href="#bonus-challenges" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Declare a variable inside the function and test to see where it exists (Hint: can you print it from outside the function?).</p></li>
+<li><p>Explore what happens when a variable both inside and outside the function have the same name. What happens to the global variable when you change the value of the local variable?</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="solutions-functions">
+<h2>Solutions - Functions<a class="headerlink" href="#solutions-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Challenge part 1</span>
+<span class="n">product_of_inputs</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">product_of_inputs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The function arguments are: 2 6 (this is done inside the function!)
+12
+</pre></div>
+</div>
+</div>
+</div>
+<p>Challenge part 2:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;nope&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span>                                 <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="n">fe9d9cd35fe2</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+      <span class="mi">1</span> <span class="c1"># 2</span>
+<span class="o">----&gt;</span> <span class="mi">2</span> <span class="n">this_is_the_function_name</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;nope&quot;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span><span class="p">:</span> <span class="n">this_is_the_function_name</span><span class="p">()</span> <span class="n">takes</span> <span class="mi">2</span> <span class="n">positional</span> <span class="n">arguments</span> <span class="n">but</span> <span class="mi">3</span> <span class="n">were</span> <span class="n">given</span>
+</pre></div>
+</div>
+<p>Challenge part 3:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    
+    <span class="n">inside_fun</span> <span class="o">=</span> <span class="s2">&quot;existential crisis&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inside_fun</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>The function arguments are: 2 5 (this is done inside the function!)
+---------------------------------------------------------------------------
+NameError                                 Traceback (most recent call last)
+&lt;ipython-input-13-e7a0563b00a6&gt; in &lt;module&gt;()
+     12 
+     13 this_is_the_function_name(2, 5)
+---&gt; 14 print(inside_fun)
+
+NameError: name &#39;inside_fun&#39; is not defined
+</pre></div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Challenge part 4</span>
+<span class="n">outside</span> <span class="o">=</span> <span class="s2">&quot;unchanged&quot;</span>
+<span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    
+    <span class="n">outside</span> <span class="o">=</span> <span class="s2">&quot;I&#39;m being manipulated&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The function arguments are:&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="s1">&#39;(this is done inside the function!)&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="n">product</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outside</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The function arguments are: 2 5 (this is done inside the function!)
+unchanged
+</pre></div>
+</div>
+</div>
+</div>
+<p>Say we had some code for taking our <code class="docutils literal notranslate"><span class="pre">survey.csv</span></code> data and splitting it out into one file for each year:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># First let&#39;s make sure we&#39;ve read the survey data into a pandas DataFrame.</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+
+<span class="n">this_year</span> <span class="o">=</span> <span class="mi">2002</span>
+<span class="c1"># Select data for just that year</span>
+<span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">this_year</span><span class="p">]</span>
+
+<span class="c1"># Write the new DataFrame to a csv file</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">this_year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+<span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are many different “chunks” of this code that we can turn into functions, and we can even create functions that call other functions inside them. Let’s first write a function that separates data for just one year and saves that data to a file:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The text between the two sets of triple double quotes is called a <em>docstring</em> and contains the documentation for the function. It does nothing when the function is running and is therefore not necessary, but it is good practice to include docstrings as a reminder of what the code does. Docstrings in functions also become part of their ‘official’ documentation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">?</span>year_to_csv
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Signature:</strong> <code class="docutils literal notranslate"><span class="pre">year_to_csv(year,</span> <span class="pre">all_data)</span></code></p>
+<p><em><strong>Docstring:</strong></em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Writes</span> <span class="n">a</span> <span class="n">csv</span> <span class="n">file</span> <span class="k">for</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">given</span> <span class="n">year</span><span class="o">.</span>
+
+<span class="n">year</span> <span class="o">---</span> <span class="n">year</span> <span class="k">for</span> <span class="n">which</span> <span class="n">data</span> <span class="ow">is</span> <span class="n">extracted</span>
+<span class="n">all_data</span> <span class="o">---</span> <span class="n">DataFrame</span> <span class="k">with</span> <span class="n">multi</span><span class="o">-</span><span class="n">year</span> <span class="n">data</span>
+</pre></div>
+</div>
+<p><em><strong>File:</strong></em>      <code class="docutils literal notranslate"><span class="pre">~/devel/python-workshop-base/workshops/docs/modules/notebooks/&lt;ipython-input-16-978149c5937c&gt;</span></code></p>
+<p><em><strong>Type:</strong></em>      <code class="docutils literal notranslate"><span class="pre">function</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the survey data into a pandas DataFrame.</span>
+<span class="c1"># (if you are jumping in to just this lesson and don&#39;t yet have the surveys.csv file yet, </span>
+<span class="c1">#  see the &quot;Data analysis in Python with Pandas&quot; `working_with_data` module)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+
+<span class="n">year_to_csv</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_22067</span><span class="o">/</span><span class="mf">3277718546.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#  see the &quot;Data analysis in Python with Pandas&quot; `working_with_data` module)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">year_to_csv</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span> 
+<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span> 
+<span class="g g-Whitespace">    </span><span class="mi">682</span> 
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span> 
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> 
+<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span> 
+<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span> 
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">789</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>                 <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;surveys.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="aside-listing-files-and-the-os-module">
+<h3>Aside - listing files and the <code class="docutils literal notranslate"><span class="pre">os</span></code> module<a class="headerlink" href="#aside-listing-files-and-the-os-module" title="Permalink to this headline">¶</a></h3>
+<p>Google Collaboratory and Juypter Notebooks have a built-in file browser, however, you can list the files and directories in the current directory (“folder”) with Python code like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>You’ll see a Python list, a bit like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;surveys.csv&#39;</span><span class="p">,</span><span class="s1">&#39;function_surveys2002.csv&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>(you may have additional files listed here, generated in previous lessons)</p>
+<p>The <a class="reference external" href="https://docs.python.org/3/library/os.html">os</a> module contains, among other things, a bunch of useful functions for working with the filesystem and file paths.</p>
+<p>Two other useful examples (hint - these might help in a upcoming challenge):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This returns True if the file or directory specified exists</span>
+<span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;surveys.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This creates empty (nested) directories based on a path (eg in a &#39;path&#39; each directory is separated by slashes)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;data/csvs/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If a directory already exists, <code class="docutils literal notranslate"><span class="pre">os.makedirs</span></code> fails and produces an error message (in Python terminology we might say it ‘raises an exception’ ).</p>
+<p>We can avoid this by using <code class="docutils literal notranslate"><span class="pre">os.path.exists</span></code> and <code class="docutils literal notranslate"><span class="pre">os.makedirs</span></code> together like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;data/csvs/&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;data/csvs/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>What we really want to do, though, is create files for multiple years without having to request them one by one. Let’s write another function that uses a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over a sequence of years and repeatedly calls the function we just wrote, <code class="docutils literal notranslate"><span class="pre">year_to_csv</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">create_csvs_by_year</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because people will naturally expect that the end year for the files is the last year with data, the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop inside the function ends at <code class="docutils literal notranslate"><span class="pre">end_year</span> <span class="pre">+</span> <span class="pre">1</span></code>. By writing the entire loop into a function, we’ve made a reusable tool for whenever we need to break a large data file into yearly files. Because we can specify the first and last year for which we want files, we can even use this function to create files for a subset of the years available. This is how we call this function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create CSV files, one for each year in the given range</span>
+<span class="n">create_csvs_by_year</span><span class="p">(</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="challenge-more-functions">
+<h2>Challenge - More Functions<a class="headerlink" href="#challenge-more-functions" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>How could you use the function <code class="docutils literal notranslate"><span class="pre">create_csvs_by_year</span></code> to create a CSV file for only one year ? (Hint: think about the syntax for range)</p></li>
+<li><p>Modify <code class="docutils literal notranslate"><span class="pre">year_to_csv</span></code> so that it has two additional arguments, <code class="docutils literal notranslate"><span class="pre">output_path</span></code> (the path of the directory where the files will be written) and <code class="docutils literal notranslate"><span class="pre">filename_prefix</span></code> (a prefix to be added to the start of the file name). Name your new function <code class="docutils literal notranslate"><span class="pre">year_to_csv_at_path</span></code>. Eg, <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">year_to_csv_at_path(year,</span> <span class="pre">all_data,</span> <span class="pre">output_path,</span> <span class="pre">filename_prefix):</span></code>. Call your new function to create a new file with a different name in a different directory. … <strong>Hint:</strong> You could manually create the target directory before calling the function using the Collaboratory / Jupyter file browser, <em>or</em> for bonus points you could do it in Python inside the function using the <code class="docutils literal notranslate"><span class="pre">os</span></code> module.</p></li>
+<li><p>Create a new version of the <code class="docutils literal notranslate"><span class="pre">create_csvs_by_year</span></code> function called <code class="docutils literal notranslate"><span class="pre">create_csvs_by_year_at_path</span></code> that also takes the additional arguments <code class="docutils literal notranslate"><span class="pre">output_path</span></code> and <code class="docutils literal notranslate"><span class="pre">filename_prefix</span></code>. Internally <code class="docutils literal notranslate"><span class="pre">create_csvs_by_year_at_path</span></code> should pass these values to <code class="docutils literal notranslate"><span class="pre">year_to_csv_at_path</span></code>. Call your new function to create a new set of files with a different name in a different directory.</p></li>
+<li><p>Make these new functions return a list of the files they have written. There are many ways you can do this (and you should try them all!): you could make the function print the filenames to screen, or you could use a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement to make the function produce a list of filenames, or you can use some combination of the two. You could also try using the <code class="docutils literal notranslate"><span class="pre">os</span></code> library to list the contents of directories.</p></li>
+</ol>
+</div>
+<div class="section" id="solutions-more-functions">
+<h2>Solutions - More Functions<a class="headerlink" href="#solutions-more-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - part 1</span>
+<span class="n">create_csvs_by_year</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - part 2 and 3</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">year_to_csv_at_path</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    output_path --- The output path for the generated file</span>
+<span class="sd">    filename_prefix --- Output filename will be of the form &quot;{filename_prefix}{year}.csv&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Create directories if required</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_path</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">output_path</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">filename_prefix</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_csvs_by_year_at_path</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    output_path --- The output path for the generated file</span>
+<span class="sd">    filename_prefix --- Output filename will be of the form &quot;{filename_prefix}{year}.csv&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">year_to_csv_at_path</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">,</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">filename_prefix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - part 4</span>
+
+<span class="k">def</span> <span class="nf">year_to_csv_return_filenames</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+    <span class="c1"># We could just print the filename. We can see the result, but won&#39;t capture the value</span>
+    <span class="c1"># print(filename)</span>
+    
+    <span class="c1"># It&#39;s often more useful to return data rather than print it, so we can do something with it</span>
+    <span class="k">return</span> <span class="n">filename</span>
+
+<span class="k">def</span> <span class="nf">create_csvs_by_year_return_filenames</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">):</span>
+    
+    <span class="n">generated_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">year_to_csv_return_filenames</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+        <span class="n">generated_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">generated_files</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">create_csvs_by_year_return_filenames</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;function_surveys2000.csv&#39;, &#39;function_surveys2001.csv&#39;, &#39;function_surveys2002.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The functions we wrote demand that we give them a value for every argument. Ideally, we would like these functions to be as flexible and independent as possible. Let’s modify the function <code class="docutils literal notranslate"><span class="pre">create_csvs_by_year</span></code> so that the <code class="docutils literal notranslate"><span class="pre">start_year</span></code> and <code class="docutils literal notranslate"><span class="pre">end_year</span></code> default to the full range of the data if they are not supplied by the user.</p>
+<p>Arguments can be given default values with an equal sign in the function declaration - we call these <strong>‘keyword’</strong> arguments. Any argument in the function without a default value (here, <code class="docutils literal notranslate"><span class="pre">all_data</span></code>) is a required argument - we call these <strong>‘positional’</strong> arguments. Positional arguements MUST come before any keyword arguments. Keyword arguments are optional - if you don’t include them when calling the function, the default value is used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">keyword_arg_test</span><span class="p">(</span><span class="n">all_data</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1977</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">2002</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A simple function to demonstrate the use of keyword arguments with defaults !</span>
+
+<span class="sd">    start_year --- the first year of data we want --- default: 1977</span>
+<span class="sd">    end_year --- the last year of data we want --- default: 2002</span>
+<span class="sd">    all_data --- DataFrame with multi-year data - not actually used</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span>
+
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">keyword_arg_test</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both optional arguments:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">keyword_arg_test</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default values:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Both optional arguments:	 1988 1993
+Default values:			 1977 2002
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">\t</span></code> in the print statements are tabs, used to make the text align and be easier to read.</p>
+<p>What if our dataset doesn’t start in 1977 and end in 2002? We can modify the function so that it looks for the ealiest and latest years in the dataset if those dates are not provided. Let’s redefine <code class="docutils literal notranslate"><span class="pre">csvs_by_year</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">all_data</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data. The start year and end year can </span>
+<span class="sd">    be optionally provided, otherwise the earliest and latest year in the dataset are</span>
+<span class="sd">    used as the range.</span>
+
+<span class="sd">    start_year --- the first year of data we want --- default: None - check all_data</span>
+<span class="sd">    end_year --- the last year of data we want --- default: None - check all_data</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">start_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">end_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span>
+
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both optional arguments:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default values:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Both optional arguments:	 1988 1993
+Default values:			 1977 2002
+</pre></div>
+</div>
+</div>
+</div>
+<p>The default values of the <code class="docutils literal notranslate"><span class="pre">start_year</span></code> and <code class="docutils literal notranslate"><span class="pre">end_year</span></code> arguments in this new version of the <code class="docutils literal notranslate"><span class="pre">csvs_by_year</span></code> function are now <code class="docutils literal notranslate"><span class="pre">None</span></code>. This is a built-in constant in Python that indicates the absence of a value - essentially, that the variable exists in the namespace of the function (the directory of variable names) but that it doesn’t correspond to any existing object.</p>
+</div>
+<div class="section" id="challenge-experimenting-with-keyword-arguments">
+<h2>Challenge - Experimenting with keyword arguments<a class="headerlink" href="#challenge-experimenting-with-keyword-arguments" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>What type of object corresponds to a variable declared as <code class="docutils literal notranslate"><span class="pre">None</span></code> ? (Hint: create a variable set to None and use the function <code class="docutils literal notranslate"><span class="pre">type()</span></code>)</p></li>
+<li><p>Compare the behavior of the function <code class="docutils literal notranslate"><span class="pre">csvs_by_year</span></code> when the keyword arguments have <code class="docutils literal notranslate"><span class="pre">None</span></code> as a default vs. calling the function by supplying (non-default) values to the keyword arguments</p></li>
+<li><p>What happens if you only include a value for <code class="docutils literal notranslate"><span class="pre">start_year</span></code> in the function call? Can you write the function call with only a value for <code class="docutils literal notranslate"><span class="pre">end_year</span></code> ? (Hint: think about how the function must be assigning values to each of the arguments - this is related to the need to put the arguments without default values before those with default values in the function definition!)</p></li>
+</ol>
+</div>
+<div class="section" id="solutions-experimenting-with-keyword-arguments">
+<h2>Solutions - Experimenting with keyword arguments<a class="headerlink" href="#solutions-experimenting-with-keyword-arguments" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Challenge 1</span>
+<span class="n">the_void</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">the_void</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NoneType
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Challenge 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1977, 2002)
+(1999, 2001)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Challenge 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">))</span>
+
+<span class="c1"># Keyword args are taken in order if there is no keyword used</span>
+<span class="c1"># Doing this is a bit dangerous (what if you later decide to add more keyword args to the function ?)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1999</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1999</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">))</span>
+
+<span class="c1"># But keyword args must always come last - this throws an error</span>
+<span class="c1"># print(csvs_by_year(surveys_df, start_year=1999, 2001))</span>
+
+<span class="c1"># We don&#39;t need to specify all keyword args, nor do they need to be in order</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="mi">2001</span><span class="p">,</span> <span class="n">start_year</span><span class="o">=</span><span class="mi">1999</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1999, 2002)
+(1999, 2002)
+(1999, 2001)
+(1977, 1999)
+(1999, 2001)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="conditionals-if-statements">
+<h2>Conditionals - <code class="docutils literal notranslate"><span class="pre">if</span></code> statements<a class="headerlink" href="#conditionals-if-statements" title="Permalink to this headline">¶</a></h2>
+<p>The body of the test function now has two conditionals (<code class="docutils literal notranslate"><span class="pre">if</span></code> statements) that check the values of <code class="docutils literal notranslate"><span class="pre">start_year</span></code> and <code class="docutils literal notranslate"><span class="pre">end_year</span></code>. <code class="docutils literal notranslate"><span class="pre">if</span></code> statements execute a segment of code when some condition is met. They commonly look something like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Meets first condition?</span>
+
+    <span class="c1"># if a IS less than zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a is a negative number&#39;</span><span class="p">)</span>
+
+<span class="k">elif</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Did not meet first condition. meets second condition?</span>
+
+    <span class="c1"># if a ISN&#39;T less than zero and IS more than zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a is a positive number&#39;</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>  <span class="c1"># Met neither condition</span>
+
+    <span class="c1"># if a ISN&#39;T less than zero and ISN&#39;T more than zero</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a must be zero!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a is a positive number
+</pre></div>
+</div>
+</div>
+</div>
+<p>Change the value of <code class="docutils literal notranslate"><span class="pre">a</span></code> to see how this function works. The statement <code class="docutils literal notranslate"><span class="pre">elif</span></code> means “else if”, and all of the conditional statements must end in a colon.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">if</span></code> statements in the function <code class="docutils literal notranslate"><span class="pre">csvs_by_year</span></code> check whether there is an object associated with the variable names <code class="docutils literal notranslate"><span class="pre">start_year</span></code> and <code class="docutils literal notranslate"><span class="pre">end_year</span></code>. If those variables are <code class="docutils literal notranslate"><span class="pre">None</span></code>, the <code class="docutils literal notranslate"><span class="pre">if</span></code> statements return the boolean <code class="docutils literal notranslate"><span class="pre">True</span></code> and execute whatever is in their body. On the other hand, if the variable names are associated with some value (they got a number in the function call), the <code class="docutils literal notranslate"><span class="pre">if</span></code> statements return <code class="docutils literal notranslate"><span class="pre">False</span></code> and do not execute. The opposite conditional statements, which would return <code class="docutils literal notranslate"><span class="pre">True</span></code> if the variables were associated with objects (if they had received value in the function call), would be <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">start_year</span></code> and <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">end_year</span></code>.</p>
+<p>As we’ve written it so far, the function <code class="docutils literal notranslate"><span class="pre">csvs_by_year</span></code> associates values in the function call with arguments in the function definition just based in their order. If the function gets only two values in the function call, the first one will be associated with <code class="docutils literal notranslate"><span class="pre">all_data</span></code> and the second with <code class="docutils literal notranslate"><span class="pre">start_year</span></code>, regardless of what we intended them to be. We can get around this problem by calling the function using keyword arguments, where each of the arguments in the function definition is associated with a keyword and the function call passes values to the function using these keywords:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default values:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="mi">1988</span><span class="p">,</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No keywords:</span><span class="se">\t\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1988</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both keywords, in order:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">1993</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1988</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Both keywords, flipped:</span><span class="se">\t\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">start_year</span> <span class="o">=</span> <span class="mi">1988</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;One keyword, default end:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+<span class="n">start</span><span class="p">,</span><span class="n">end</span> <span class="o">=</span> <span class="n">csvs_by_year</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">,</span> <span class="n">end_year</span> <span class="o">=</span> <span class="mi">1993</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;One keyword, default start:</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Default values:			 1977 2002
+No keywords:			 1988 1993
+Both keywords, in order:	 1988 1993
+Both keywords, flipped:		 1988 1993
+One keyword, default end:	 1988 2002
+One keyword, default start:	 1977 1993
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="multiple-choice-challenge">
+<h2>Multiple choice challenge<a class="headerlink" href="#multiple-choice-challenge" title="Permalink to this headline">¶</a></h2>
+<p>What output would you expect from the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement (try to figure out the answer without running the code):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pod_bay_doors_open</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">dave_want_doors_open</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">hal_insanity_level</span> <span class="o">=</span> <span class="mi">2001</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">pod_bay_doors_open</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dave: Open the pod bay doors please HAL.&quot;</span><span class="p">)</span>
+    <span class="n">dave_wants_doors_open</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">elif</span> <span class="n">pod_bay_doors_open</span> <span class="ow">and</span> <span class="n">hal_insanity_level</span> <span class="o">&gt;=</span> <span class="mi">95</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HAL: I&#39;m closing the pod bay doors, Dave.&quot;</span><span class="p">)</span>
+    
+<span class="k">if</span> <span class="n">dave_wants_doors_open</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pod_bay_doors_open</span> <span class="ow">and</span> <span class="n">hal_insanity_level</span> <span class="o">&gt;=</span> <span class="mi">95</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HAL: I’m sorry, Dave. I’m afraid I can’t do that.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">dave_wants_doors_open</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">pod_bay_doors_open</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HAL: I&#39;m opening the pod bay doors, welcome back Dave.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;... silence of space ...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>a)</strong> “HAL: I’m closing the pod bay doors, Dave.”, “… silence of space …”</p>
+<p><strong>b)</strong> “Dave: Open the pod bay doors please HAL.”, “HAL: I’m sorry, Dave. I’m afraid I can’t do that.”</p>
+<p><strong>c)</strong> “… silence of space …”</p>
+<p><strong>d)</strong> “Dave: Open the pod bay doors please HAL.”, HAL: “I’m opening the pod bay doors, welcome back Dave.”</p>
+<p><strong>Option (b)</strong></p>
+</div>
+<div class="section" id="bonus-challenge-modifying-functions">
+<h2>Bonus Challenge - Modifying functions<a class="headerlink" href="#bonus-challenge-modifying-functions" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Rewrite the <code class="docutils literal notranslate"><span class="pre">year_to_csv</span></code> and <code class="docutils literal notranslate"><span class="pre">csvs_by_year</span></code> functions to have keyword arguments with default values.</p></li>
+<li><p>Modify the functions so that they don’t create yearly files if there is no data for a given year and display an alert to the user (Hint: use conditional statements to do this. For an extra challenge, use <code class="docutils literal notranslate"><span class="pre">try</span></code> statements !).</p></li>
+<li><p>The code below checks to see whether a directory exists and creates one if it doesn’t. Add some code to your function that writes out the CSV files, to check for a directory to write to.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">if</span> <span class="s1">&#39;dir_name_here&#39;</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">():</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory exists&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;dir_name_here&#39;</span><span class="p">)</span>
+   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory created&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">4.</span></code> The code that you have written so far to loop through the years is good, however it is not necessarily reproducible with different datasets. For instance, what happens to the code if we have additional years of data in our CSV files? Using the tools that you learned in the previous activities, make a list of all years represented in the data. Then create a loop to process your data, that begins at the earliest year and ends at the latest year using that list.</p>
+<p><em>HINT:</em> you can create a loop with a list as follows: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">years</span> <span class="pre">in</span> <span class="pre">year_list:</span></code></p>
+</div>
+<div class="section" id="solutions-modifying-functions">
+<h2>Solutions - Modifying functions<a class="headerlink" href="#solutions-modifying-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - part 1</span>
+
+<span class="k">def</span> <span class="nf">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+    
+<span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">start_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">start_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">end_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - part 2</span>
+
+<span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">start_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end_year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    start_year --- the first year of data we want</span>
+<span class="sd">    end_year --- the last year of data we want</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">start_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">start_year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">end_year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">end_year</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_year</span><span class="p">,</span> <span class="n">end_year</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># print(len(all_data[all_data.year == year]))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skipping: &quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="s2">&quot; - no data points for this year.&quot;</span><span class="p">)</span>
+
+<span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+<span class="n">csvs_by_year</span><span class="p">(</span><span class="mi">1977</span><span class="p">,</span> <span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># Solution - part 3</span>
+<span class="k">def</span> <span class="nf">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">all_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;output&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes a csv file for data from a given year.</span>
+
+<span class="sd">    year --- year for which data is extracted</span>
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    output_dir --- the output directory when CSV files will be written</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">all_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">all_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">year</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># Select data for the year</span>
+    <span class="n">surveys_year</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[</span><span class="n">all_data</span><span class="o">.</span><span class="n">year</span> <span class="o">==</span> <span class="n">year</span><span class="p">]</span>
+
+
+    <span class="k">if</span> <span class="n">output_dir</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory exists: &#39;</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processed directory created: &#39;</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">)</span>
+    
+    <span class="c1"># Write the new DataFrame to a csv file</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="s1">&#39;function_surveys&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
+    <span class="c1"># The more correct way to create paths is:</span>
+    <span class="c1"># filename = os.path.join(output_dir, &#39;function_surveys&#39; + str(year) + &#39;.csv&#39;)</span>
+    <span class="n">surveys_year</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+<span class="n">year_to_csv</span><span class="p">(</span><span class="mi">2002</span><span class="p">,</span> <span class="n">surveys_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processed directory exists:  output
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_solution docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution - part 4</span>
+<span class="k">def</span> <span class="nf">csvs_by_year</span><span class="p">(</span><span class="n">all_data</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Writes separate CSV files for each year of data.</span>
+
+<span class="sd">    all_data --- DataFrame with multi-year data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># We could do this, but missing years will be included in the &#39;range&#39;</span>
+    <span class="c1"># start_year = min(all_data.year)</span>
+    <span class="c1"># end_year = max(all_data.year)</span>
+    <span class="c1"># year_list = range(start_year, end_year+1)</span>
+    
+    <span class="c1"># Instead, we create an empty list, then loop over all the rows, adding years</span>
+    <span class="c1"># we haven&#39;t seen yet to the list.</span>
+    <span class="n">year_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">year</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+            <span class="n">year_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+    
+    <span class="c1"># An elegant alternative is to use a &#39;set&#39; object.</span>
+    <span class="c1"># A &#39;set&#39; is a collection where every value is unique - no duplicates.</span>
+    <span class="c1"># This ensures no repeated years and has the advantage of also skipping missing years.</span>
+    <span class="c1"># year_list = set(surveys_df.year)</span>
+    
+    <span class="c1"># &quot;end_year&quot; is the last year of data we want to pull, so we loop to end_year+1</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">year_list</span><span class="p">:</span>
+        <span class="n">year_to_csv</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">all_data</span><span class="p">)</span>
+        
+<span class="c1"># The &#39;list&#39; of years from each row contains duplicates (we just list the first 20 here)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Making it a &#39;set&#39; removes duplicates</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">year</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977]
+
+[1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Monash Data Fluency Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

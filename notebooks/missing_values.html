@@ -1,0 +1,1727 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handling Missing data &#8212; Monash Data Fluency Introduction to Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Monash Data Fluency Introduction to Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Introduction to Python Workshop
+  </a>
+ </li>
+</ul>
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/missing_values.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/MonashDataFluency/python-workshop-base/issues/new?title=Issue%20on%20page%20%2Fnotebooks/missing_values.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/master?urlpath=lab/tree/html/notebooks/missing_values.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/MonashDataFluency/python-workshop-base/blob/master/html/notebooks/missing_values.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Handling Missing data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-information">
+   Module information
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Handling Missing Data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-masks-to-identify-a-specific-condition">
+     Using masks to identify a specific condition
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-missing-values">
+     Finding Missing Values
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-select-rows-with-missing-data">
+     How to select rows with missing data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explaination">
+     Explaination
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dealing-with-missing-values">
+     Dealing with missing values.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#where-are-the-nan-s">
+     Where Are the NaN’s?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-information">
+     <em>
+      Extra Information
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-out-data-to-csv">
+     Writing Out Data to CSV
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#recap">
+       Recap
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra">
+     <em>
+      Extra
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Handling Missing data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Handling Missing data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-information">
+   Module information
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Handling Missing Data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-masks-to-identify-a-specific-condition">
+     Using masks to identify a specific condition
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finding-missing-values">
+     Finding Missing Values
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-select-rows-with-missing-data">
+     How to select rows with missing data
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explaination">
+     Explaination
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dealing-with-missing-values">
+     Dealing with missing values.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#where-are-the-nan-s">
+     Where Are the NaN’s?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra-information">
+     <em>
+      Extra Information
+     </em>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#writing-out-data-to-csv">
+     Writing Out Data to CSV
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#recap">
+       Recap
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#extra">
+     <em>
+      Extra
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="section" id="handling-missing-data">
+<h1>Handling Missing data<a class="headerlink" href="#handling-missing-data" title="Permalink to this headline">¶</a></h1>
+<p><em>Estimated teaching time:</em> 20 min</p>
+<p><em>Estimated challenge time:</em> 0 min</p>
+</div>
+<div class="section" id="module-information">
+<h1>Module information<a class="headerlink" href="#module-information" title="Permalink to this headline">¶</a></h1>
+<p><em>Key questions:</em></p>
+<ul class="simple">
+<li><p>“What is missing data?”</p></li>
+<li><p>“How  can I analyse my data with missing values using Pandas?”</p></li>
+</ul>
+<p><em>Learning objectives:</em></p>
+<ul class="simple">
+<li><p>Describe what missing values mean.</p></li>
+<li><p>How to access missing values in dataset.</p></li>
+<li><p>What NaN values are, how they might be represented, and what this means for your work</p></li>
+<li><p>How to replace NaN values, if desired</p></li>
+<li><p>How to use <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> to write manipulated data to a file.</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>Handling Missing Data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Most of the times real-world data is rarely clean and homogeneous. In many cases, dataset of interest will have some amount of data missing. To make matters even more complicated, different data sources may indicate missing data in different ways.</p>
+<p>In this module, we will discuss some general considerations for missing data, discuss how Pandas chooses to represent it, and demonstrate some built-in Pandas tools for handling missing data in Python. We refer the missing data as null, NaN, or NA values in general.</p>
+<p>Before we start, lets make sure the Pandas and matplotlib packages are <strong>installed</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install pandas matplotlib
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pandas in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (1.4.0)
+Requirement already satisfied: matplotlib in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (3.5.1)
+Requirement already satisfied: pytz&gt;=2020.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2021.3)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: numpy&gt;=1.18.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from pandas) (1.22.2)
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (9.0.1)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: packaging&gt;=20.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (21.3)
+Requirement already satisfied: cycler&gt;=0.10 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (4.29.1)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from matplotlib) (3.0.7)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /home/danph/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas) (1.16.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now import pandas into your notebook as pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now again import <code class="docutils literal notranslate"><span class="pre">surveys.csv</span></code> dataset into our notebook as we did in previous lesson.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_22225</span><span class="o">/</span><span class="mf">2629989702.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">surveys_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;surveys.csv&quot;</span><span class="p">)</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span> 
+<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span> 
+<span class="g g-Whitespace">    </span><span class="mi">682</span> 
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span> 
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> 
+<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span> 
+<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span> 
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">~/Repos/win_ssd/myprojects/python-workshop-base/.venv/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">787</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">788</span>             <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">789</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">790</span>                 <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">791</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;surveys.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-masks-to-identify-a-specific-condition">
+<h2>Using masks to identify a specific condition<a class="headerlink" href="#using-masks-to-identify-a-specific-condition" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>mask</strong> can be useful to locate where a particular subset of values exist or
+don’t exist - for example,  NaN, or “Not a Number” values. To understand masks,
+we also need to understand <code class="docutils literal notranslate"><span class="pre">BOOLEAN</span></code> objects in Python.</p>
+<p>Boolean values include <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set value of x to be 5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">==</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="finding-missing-values">
+<h2>Finding Missing Values<a class="headerlink" href="#finding-missing-values" title="Permalink to this headline">¶</a></h2>
+<p>Let’s identify all locations in the survey data that have
+null (missing or NaN) data values. We can use the <code class="docutils literal notranslate"><span class="pre">isnull</span></code> method to do this.
+The <code class="docutils literal notranslate"><span class="pre">isnull</span></code> method will compare each cell with a null value. If an element
+has a null value, it will be assigned a value of  <code class="docutils literal notranslate"><span class="pre">True</span></code> in the output object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="how-to-select-rows-with-missing-data">
+<h2>How to select rows with missing data<a class="headerlink" href="#how-to-select-rows-with-missing-data" title="Permalink to this headline">¶</a></h2>
+<p>To select the rows where there are null values, we can use
+the mask as an index to subset our data as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To select only the rows with NaN values, we can use the &#39;any()&#39; method</span>
+<span class="n">surveys_df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>record_id</th>
+      <th>month</th>
+      <th>day</th>
+      <th>year</th>
+      <th>site_id</th>
+      <th>species_id</th>
+      <th>sex</th>
+      <th>hindfoot_length</th>
+      <th>weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>32.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>NL</td>
+      <td>M</td>
+      <td>33.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>PF</td>
+      <td>M</td>
+      <td>14.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>PE</td>
+      <td>F</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>1</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>34.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>6</td>
+      <td>PF</td>
+      <td>F</td>
+      <td>20.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>5</td>
+      <td>DS</td>
+      <td>F</td>
+      <td>53.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>7</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>38.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>8</td>
+      <td>DM</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>6</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>4</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>3</td>
+      <td>DS</td>
+      <td>F</td>
+      <td>48.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>2</td>
+      <td>PP</td>
+      <td>M</td>
+      <td>22.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>7</td>
+      <td>16</td>
+      <td>1977</td>
+      <td>4</td>
+      <td>PF</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>11</td>
+      <td>DS</td>
+      <td>F</td>
+      <td>48.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>14</td>
+      <td>DM</td>
+      <td>F</td>
+      <td>34.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>15</td>
+      <td>NL</td>
+      <td>F</td>
+      <td>31.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>13</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>13</td>
+      <td>SH</td>
+      <td>M</td>
+      <td>21.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>9</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>26</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>15</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>31.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>15</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>36.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>11</td>
+      <td>DM</td>
+      <td>M</td>
+      <td>38.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>11</td>
+      <td>PP</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>7</td>
+      <td>17</td>
+      <td>1977</td>
+      <td>10</td>
+      <td>DS</td>
+      <td>F</td>
+      <td>52.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>35187</th>
+      <td>35188</td>
+      <td>11</td>
+      <td>10</td>
+      <td>2002</td>
+      <td>10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35256</th>
+      <td>35257</td>
+      <td>12</td>
+      <td>7</td>
+      <td>2002</td>
+      <td>22</td>
+      <td>PB</td>
+      <td>M</td>
+      <td>26.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35259</th>
+      <td>35260</td>
+      <td>12</td>
+      <td>7</td>
+      <td>2002</td>
+      <td>21</td>
+      <td>PB</td>
+      <td>F</td>
+      <td>24.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35277</th>
+      <td>35278</td>
+      <td>12</td>
+      <td>7</td>
+      <td>2002</td>
+      <td>20</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35279</th>
+      <td>35280</td>
+      <td>12</td>
+      <td>7</td>
+      <td>2002</td>
+      <td>16</td>
+      <td>PB</td>
+      <td>M</td>
+      <td>28.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35322</th>
+      <td>35323</td>
+      <td>12</td>
+      <td>8</td>
+      <td>2002</td>
+      <td>11</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35328</th>
+      <td>35329</td>
+      <td>12</td>
+      <td>8</td>
+      <td>2002</td>
+      <td>11</td>
+      <td>PP</td>
+      <td>M</td>
+      <td>NaN</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>35370</th>
+      <td>35371</td>
+      <td>12</td>
+      <td>8</td>
+      <td>2002</td>
+      <td>14</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35378</th>
+      <td>35379</td>
+      <td>12</td>
+      <td>8</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>PB</td>
+      <td>F</td>
+      <td>26.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35384</th>
+      <td>35385</td>
+      <td>12</td>
+      <td>8</td>
+      <td>2002</td>
+      <td>10</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35387</th>
+      <td>35388</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>1</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>35.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35403</th>
+      <td>35404</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>2</td>
+      <td>NL</td>
+      <td>F</td>
+      <td>30.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35448</th>
+      <td>35449</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>20</td>
+      <td>OT</td>
+      <td>F</td>
+      <td>20.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35452</th>
+      <td>35453</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>20</td>
+      <td>PB</td>
+      <td>M</td>
+      <td>28.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35457</th>
+      <td>35458</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>20</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35477</th>
+      <td>35478</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>24</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35485</th>
+      <td>35486</td>
+      <td>12</td>
+      <td>29</td>
+      <td>2002</td>
+      <td>16</td>
+      <td>DO</td>
+      <td>M</td>
+      <td>37.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35495</th>
+      <td>35496</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>4</td>
+      <td>PB</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35510</th>
+      <td>35511</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>11</td>
+      <td>DX</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35511</th>
+      <td>35512</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>11</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35512</th>
+      <td>35513</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>11</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35514</th>
+      <td>35515</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>11</td>
+      <td>SF</td>
+      <td>F</td>
+      <td>27.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35519</th>
+      <td>35520</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>9</td>
+      <td>SF</td>
+      <td>NaN</td>
+      <td>24.0</td>
+      <td>36.0</td>
+    </tr>
+    <tr>
+      <th>35527</th>
+      <td>35528</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>13</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35529</th>
+      <td>35530</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>13</td>
+      <td>OT</td>
+      <td>F</td>
+      <td>20.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35530</th>
+      <td>35531</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>13</td>
+      <td>PB</td>
+      <td>F</td>
+      <td>27.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35543</th>
+      <td>35544</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>US</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35544</th>
+      <td>35545</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35545</th>
+      <td>35546</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>15</td>
+      <td>AH</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>35548</th>
+      <td>35549</td>
+      <td>12</td>
+      <td>31</td>
+      <td>2002</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>4873 rows × 9 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="explaination">
+<h2>Explaination<a class="headerlink" href="#explaination" title="Permalink to this headline">¶</a></h2>
+<p>Notice that we have <code class="docutils literal notranslate"><span class="pre">4873</span></code> observations/rows that contain one or more missing values.
+Thats roughly <code class="docutils literal notranslate"><span class="pre">14%</span></code> of data contains missing values.</p>
+<p>We have used <code class="docutils literal notranslate"><span class="pre">[]</span></code> convension to select subset of data.</p>
+<p>More information about slicing and indexing can be found out <a class="reference internal" href="indexing.html"><span class="doc std std-doc">here</span></a>.</p>
+<p><strong>(axis=1)</strong> is a numpy convention to specify columns.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">weight</span></code> column of our DataFrame contains many <code class="docutils literal notranslate"><span class="pre">null</span></code> or <code class="docutils literal notranslate"><span class="pre">NaN</span></code>
+values. Next, we will explore ways of dealing with this.</p>
+<p>If we look at the <code class="docutils literal notranslate"><span class="pre">weight</span></code> column in the surveys
+data we notice that there are NaN (<strong>N</strong>ot <strong>a</strong> <strong>N</strong>umber) values. <em>NaN</em> values are undefined
+values that cannot be represented mathematically. Pandas, for example, will read
+an empty cell in a CSV or Excel sheet as a NaN. NaNs have some desirable properties: if we
+were to average the <code class="docutils literal notranslate"><span class="pre">weight</span></code> column without replacing our NaNs, Python would know to skip
+over those cells.</p>
+</div>
+<div class="section" id="dealing-with-missing-values">
+<h2>Dealing with missing values.<a class="headerlink" href="#dealing-with-missing-values" title="Permalink to this headline">¶</a></h2>
+<p>Dealing with missing data values is always a challenge. It’s sometimes hard to
+know why values are missing - was it because of a data entry error? Or data that
+someone was unable to collect? Should the value be 0? We need to know how
+missing values are represented in the dataset in order to make good decisions.
+If we’re lucky, we have some metadata that will tell us more about how null
+values were handled.</p>
+<p>For instance, in some disciplines, like Remote Sensing, missing data values are
+often defined as -9999. Having a bunch of -9999 values in your data could really
+alter numeric calculations. Often in spreadsheets, cells are left empty where no
+data are available. Pandas will, by default, replace those missing values with
+NaN. However it is good practice to get in the habit of intentionally marking
+cells that have no data, with a no data value! That way there are no questions
+in the future when you (or someone else) explores your data.</p>
+</div>
+<div class="section" id="where-are-the-nan-s">
+<h2>Where Are the NaN’s?<a class="headerlink" href="#where-are-the-nan-s" title="Permalink to this headline">¶</a></h2>
+<p>Let’s explore the NaN values in our data a bit further. Using the tools we
+learned in lesson 02, we can figure out how many rows contain NaN values for
+weight. We can also create a new subset from our data that only contains rows
+with weight values &gt; 0 (i.e., select meaningful weight values):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## How many missing values are there in weight column?</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">weight</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3266
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How many rows have weight values?</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="n">surveys_df</span><span class="o">.</span><span class="n">weight</span><span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32283
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can replace all NaN values with zeroes using the <code class="docutils literal notranslate"><span class="pre">.fillna()</span></code> method (after
+making a copy of the data so we don’t lose our work):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creat a new DataFrame using copy</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># Fill all NaN values with 0</span>
+<span class="n">df1</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However NaN and 0 yield different analysis results. The mean value when NaN
+values are replaced with 0 is different from when NaN values are simply thrown
+out or ignored.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.672428212991356
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>38.751976145601844
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="extra-information">
+<h2><em>Extra Information</em><a class="headerlink" href="#extra-information" title="Permalink to this headline">¶</a></h2>
+<p>We can fill NaN values with any value that we chose. The code below fills all
+NaN values with a mean for all weight values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42.67242821299182
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="writing-out-data-to-csv">
+<h2>Writing Out Data to CSV<a class="headerlink" href="#writing-out-data-to-csv" title="Permalink to this headline">¶</a></h2>
+<p>We’ve learned about using manipulating data to get desired outputs. But we’ve also discussed
+keeping data that has been manipulated separate from our raw data. Something we might be interested
+in doing is working with only the columns that have full data. First, let’s reload the data so
+we’re not mixing up all of our previous manipulations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_na</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you now type <code class="docutils literal notranslate"><span class="pre">df_na</span></code>, you should observe that the resulting DataFrame has <code class="docutils literal notranslate"><span class="pre">30676</span></code> rows
+and 9 columns, much smaller than the <code class="docutils literal notranslate"><span class="pre">35549</span></code> row original.</p>
+<p>We can now use the <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> command to do export a DataFrame in CSV format. Note that the code
+below will by default save the data into the current working directory. We can
+save it to a different folder by adding the foldername and a slash before the filename:
+<code class="docutils literal notranslate"><span class="pre">df1.to_csv('foldername/out.csv')</span></code>.
+We use ‘index=False’ so that
+pandas doesn’t include the index number for each line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write DataFrame to CSV</span>
+<span class="n">df_na</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;output/surveys_complete.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="recap">
+<h3>Recap<a class="headerlink" href="#recap" title="Permalink to this headline">¶</a></h3>
+<p>What we’ve learned:</p>
+<ul class="simple">
+<li><p>What NaN values are, how they might be represented, and what this means for your work</p></li>
+<li><p>How to replace NaN values, if desired</p></li>
+<li><p>How to use <code class="docutils literal notranslate"><span class="pre">to_csv</span></code> to write manipulated data to a file.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="extra">
+<h2><em>Extra</em><a class="headerlink" href="#extra" title="Permalink to this headline">¶</a></h2>
+<p>We can run <code class="docutils literal notranslate"><span class="pre">isnull</span></code> on a particular column too. What does the code below do?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What does this do?</span>
+<span class="n">empty_weights</span> <span class="o">=</span> <span class="n">surveys_df</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">surveys_df</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">empty_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       NaN
+1       NaN
+2       NaN
+3       NaN
+4       NaN
+5       NaN
+6       NaN
+7       NaN
+8       NaN
+9       NaN
+10      NaN
+11      NaN
+12      NaN
+13      NaN
+14      NaN
+15      NaN
+16      NaN
+17      NaN
+18      NaN
+19      NaN
+20      NaN
+21      NaN
+22      NaN
+23      NaN
+24      NaN
+25      NaN
+26      NaN
+27      NaN
+28      NaN
+29      NaN
+         ..
+35138   NaN
+35168   NaN
+35187   NaN
+35256   NaN
+35259   NaN
+35277   NaN
+35279   NaN
+35322   NaN
+35370   NaN
+35378   NaN
+35384   NaN
+35387   NaN
+35403   NaN
+35448   NaN
+35452   NaN
+35457   NaN
+35477   NaN
+35485   NaN
+35495   NaN
+35510   NaN
+35511   NaN
+35512   NaN
+35514   NaN
+35527   NaN
+35529   NaN
+35530   NaN
+35543   NaN
+35544   NaN
+35545   NaN
+35548   NaN
+Name: weight, Length: 3266, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a minute to look at the statement above. We are using the Boolean
+object <code class="docutils literal notranslate"><span class="pre">pd.isnull(surveys_df['weight'])</span></code> as an index to <code class="docutils literal notranslate"><span class="pre">surveys_df</span></code>. We are
+asking Python to select rows that have a <code class="docutils literal notranslate"><span class="pre">NaN</span></code> value of weight.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By The Monash Data Fluency Community<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
