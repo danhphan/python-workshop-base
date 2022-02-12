@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Functions &#8212; Monash Data Fluency Introduction to Python</title>
+    <title>Functions &#8212; Introduction to Python</title>
     
   <link href="../../_static/css/theme.css" rel="stylesheet">
   <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -47,9 +47,9 @@
     <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
     </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -82,7 +82,7 @@
       <img src="../../_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Monash Data Fluency Introduction to Python</h1>
+      <h1 class="site-logo" id="site-title">Introduction to Python</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
@@ -97,6 +97,54 @@
   </a>
  </li>
 </ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Standard workshop
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Introduction - The Basics of Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../working_with_data.html">
+   Data analysis in Python with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../indexing.html">
+   Indexing and Slicing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../missing_values.html">
+   Handling Missing data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../loops.html">
+   Automation with Loops
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../plotting_with_plotnine.html">
+   Making Plots With plotnine (aka ggplot)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../functions.html">
+   Reusable and modular code with functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../defensive_programming.html">
+   Defensive Programming
+  </a>
+ </li>
+</ul>
+
     </div>
 </nav> <!-- To handle the deprecated key -->
 
@@ -177,7 +225,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/jupyterbook?urlpath=lab/tree/workshop/notebooks/wip/functions.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/MonashDataFluency/python-workshop-base/jupyterbook?urlpath=tree/workshop/notebooks/wip/functions.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../../_static/images/logo_binder.svg"
@@ -190,6 +238,9 @@
                     src="../../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
         
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
         
     </div>
 </div>
@@ -355,8 +406,8 @@
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "MonashDataFluency/python-workshop-base",
+            ref: "jupyterbook",
         },
         codeMirrorConfig: {
             theme: "abcdef",
